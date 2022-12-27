@@ -11,11 +11,9 @@ export interface Transaction {
   updatedAt: string;
 }
 
-export interface AllTransactionResponse {
-  data: Array<Transaction>;
-}
+export type AllTransactionResponse = Array<Transaction>;
 
 export type PostTransactionValues = Pick<
   Transaction,
-  "value" | "account" | "category" | "type"
+  'value' | 'account' | 'category' | 'type'
 >;

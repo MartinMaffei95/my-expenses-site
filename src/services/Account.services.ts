@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { AllTransactionResponse } from '../Interfaces/Transaction.interface';
+import { AllAccountsResponse } from '../Interfaces/Account.interface';
 
 const { VITE_API_URI } = import.meta.env;
 
-export const getAllTransactions = async (): Promise<AllTransactionResponse> => {
+export const getAllAccounts = async (): Promise<AllAccountsResponse> => {
   try {
-    const { data, status } = await axios.get<AllTransactionResponse>(
-      `${VITE_API_URI}/transactions/all`,
+    const { data, status } = await axios.get<AllAccountsResponse>(
+      `${VITE_API_URI}/account/all`,
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(

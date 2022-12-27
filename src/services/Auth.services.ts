@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   LoginResponse,
   LoginValues,
   RegisterResponse,
   RegisterValues,
-} from "../Interfaces/Auth.interface";
+} from '../Interfaces/Auth.interface';
 
 const { VITE_API_URI } = import.meta.env;
 
@@ -19,28 +19,26 @@ export const registerUser = async (values: RegisterValues) => {
       },
       {
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
         },
       }
     );
 
-    console.log(JSON.stringify(data, null, 4));
-
-    console.log("response status is: ", status);
-
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
+      console.log('error message: ', error.message);
       return error.message;
     } else {
-      console.log("unexpected error: ", error);
-      return "An unexpected error occurred";
+      console.log('unexpected error: ', error);
+      return 'An unexpected error occurred';
     }
   }
 };
 
-export const loginUser = async (values: LoginValues) => {
+export const loginUser = async (
+  values: LoginValues
+): Promise<LoginResponse | Error> => {
   try {
     const { data, status } = await axios.post<LoginResponse>(
       `${VITE_API_URI}/auth/login`,
@@ -50,21 +48,21 @@ export const loginUser = async (values: LoginValues) => {
       },
       {
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
         },
       }
     );
 
     const token = JSON.stringify(data?.token);
-    localStorage.setItem("token", token);
+    const id = JSON.stringify(data?.user?._id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('user_id', id);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
-      return error.message;
+      throw new Error(error.response?.data);
     } else {
-      console.log("unexpected error: ", error);
-      return "An unexpected error occurred";
+      throw new Error('UNEXPECTED ERROR');
     }
   }
 };

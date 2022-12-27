@@ -1,25 +1,36 @@
-import { useFormik, FormikProps } from "formik";
-import * as yup from "yup";
-import AuthFormContainer from "../../components/Container/AuthFormContainer";
-import InputField from "../../components/Pure/InputField";
-import axios from "axios";
-import { LoginValues } from "../../Interfaces/Auth.interface";
-import { loginUser } from "../../services/Auth.services";
+import { useFormik, FormikProps } from 'formik';
+import * as yup from 'yup';
+import AuthFormContainer from '../../components/Container/AuthFormContainer';
+import InputField from '../../components/Pure/InputField';
+import axios from 'axios';
+import { LoginResponse, LoginValues } from '../../Interfaces/Auth.interface';
+import { loginUser } from '../../services/Auth.services';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const { VITE_API_URI } = import.meta.env;
+  const navigate: NavigateFunction = useNavigate();
 
   const initialValues = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   };
 
   const validationSchema = yup.object({
     username: yup.string().required(),
-    password: yup.string().required("Password is required"),
+    password: yup.string().required('Password is required'),
   });
 
-  const onSubmit = (): void => {
-    loginUser(values);
+  const onSubmit = async (): Promise<void> => {
+    try {
+      await loginUser(values);
+      navigate('/');
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log('Unexpected error', err);
+      }
+    }
   };
 
   const {
