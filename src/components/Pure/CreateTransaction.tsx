@@ -1,7 +1,7 @@
-import { useFormik, FormikProps } from "formik";
-import * as yup from "yup";
-import { PostTransactionValues } from "../../Interfaces/Transaction.interface";
-import InputField from "./InputField";
+import { useFormik, FormikProps } from 'formik';
+import * as yup from 'yup';
+import { PostTransactionValues } from '../../Interfaces/Transaction.interface';
+import InputField from './InputField';
 
 const CreateTransaction = () => {
   // {
@@ -15,14 +15,14 @@ const CreateTransaction = () => {
 
   const initialValues = {
     value: 0,
-    account: "",
-    category: "",
-    type: "",
+    account: '',
+    category: '',
+    type: '',
   };
 
   const validationSchema = yup.object({
     username: yup.string().required(),
-    password: yup.string().required("Password is required"),
+    password: yup.string().required('Password is required'),
   });
 
   const onSubmit = (): void => {};

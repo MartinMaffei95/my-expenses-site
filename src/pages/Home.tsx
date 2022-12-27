@@ -1,11 +1,13 @@
-import axios from "axios";
-import { TransactionContainer } from "../components/Container/TransactionsContainer";
-import { getUserData } from "../services/User.services";
+
+import AccountsContainer from '../components/Container/AccountsContainer';
+import { TransactionContainer } from '../components/Container/TransactionsContainer';
 
 const Home = () => {
   getUserData();
   return (
     <div>
+      <AccountsContainer />
+      <hr />
       <TransactionContainer />
     </div>
   );

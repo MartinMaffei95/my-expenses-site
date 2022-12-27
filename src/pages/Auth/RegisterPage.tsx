@@ -1,25 +1,25 @@
-import { useFormik, FormikProps } from "formik";
-import * as yup from "yup";
-import AuthFormContainer from "../../components/Container/AuthFormContainer";
-import InputField from "../../components/Pure/InputField";
-import { RegisterValues } from "../../Interfaces/Auth.interface";
-import { registerUser } from "../../services/Auth.services";
+import { useFormik, FormikProps } from 'formik';
+import * as yup from 'yup';
+import AuthFormContainer from '../../components/Container/AuthFormContainer';
+import InputField from '../../components/Pure/InputField';
+import { RegisterValues } from '../../Interfaces/Auth.interface';
+import { registerUser } from '../../services/Auth.services';
 
 const RegisterPage = () => {
   const initialValues = {
-    name: "",
-    username: "",
-    password: "",
-    passwordConfirmation: "",
+    name: '',
+    username: '',
+    password: '',
+    passwordConfirmation: '',
   };
 
   const validationSchema = yup.object({
-    name: yup.string().required("Este campo es requerido"),
+    name: yup.string().required('Este campo es requerido'),
     username: yup.string().required(),
-    password: yup.string().required("Password is required"),
+    password: yup.string().required('Password is required'),
     passwordConfirmation: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Las contraseñas no coinciden"),
+      .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden'),
   });
 
   const onSubmit = (): void => {

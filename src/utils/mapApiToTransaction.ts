@@ -1,13 +1,12 @@
 import {
   AllTransactionResponse,
   Transaction,
-} from "../Interfaces/Transaction.interface";
+} from '../Interfaces/Transaction.interface';
 
 export const mapApiToTransaction = (
   apiTransactions: AllTransactionResponse
 ): Array<Transaction> => {
-  //   if (apiTransactions instanceof Error) return apiTransactions;
-  return apiTransactions?.data?.map((transaction: Transaction) => {
+  return apiTransactions?.map((transaction: Transaction) => {
     const {
       _id,
       value,

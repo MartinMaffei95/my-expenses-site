@@ -1,4 +1,4 @@
-import { Transaction } from "../../Interfaces/Transaction.interface";
+import { Transaction } from '../../Interfaces/Transaction.interface';
 
 interface TransactionProps {
   transaction: Transaction;
