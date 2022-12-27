@@ -2,6 +2,7 @@ import { useFormik, FormikProps } from 'formik';
 import * as yup from 'yup';
 import { PostTransactionValues } from '../../Interfaces/Transaction.interface';
 import InputField from './InputField';
+import SelectField from './SelectField';
 
 const CreateTransaction = () => {
   // {
@@ -53,7 +54,7 @@ const CreateTransaction = () => {
           errorMessage={touched.value && errors.value ? errors.value : null}
         />
 
-        <InputField
+        <SelectField
           label="Cuenta"
           inputName="account"
           value={values.account}

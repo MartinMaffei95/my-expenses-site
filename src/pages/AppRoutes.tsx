@@ -5,6 +5,7 @@ import RegisterPage from './Auth/RegisterPage';
 
 import Home from './Home';
 import { Team } from './Team';
+import NewTransactionPage from './Transaction/NewTransactionPage';
 
 // type Props = {
 //   children?: JSX.Element | undefined;
@@ -47,6 +48,15 @@ const router = createBrowserRouter([
       {
         path: 'team',
         element: <Team />,
+      },
+      {
+        path: 'transaction',
+        children: [
+          {
+            path: 'add',
+            element: <NewTransactionPage />,
+          },
+        ],
       },
     ],
   },

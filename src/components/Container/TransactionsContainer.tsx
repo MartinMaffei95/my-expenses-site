@@ -23,6 +23,9 @@ export const TransactionContainer = () => {
           transactions?.map((t) => <SingleTransaction transaction={t} />)
         )}
       </div>
+      <div>
+        <button>Crear</button>
+      </div>
     </div>
   );
 };
