@@ -6,7 +6,13 @@ import axios from 'axios';
 import { LoginResponse, LoginValues } from '../../Interfaces/Auth.interface';
 import { loginUser } from '../../services/Auth.services';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserData } from '../../redux/userSlice';
+import { getUserData } from '../../services/User.services';
 const LoginPage = () => {
+  const dispatch = useDispatch();
+
   const { VITE_API_URI } = import.meta.env;
   const navigate: NavigateFunction = useNavigate();
 
@@ -23,6 +29,8 @@ const LoginPage = () => {
   const onSubmit = async (): Promise<void> => {
     try {
       await loginUser(values);
+      const userData = await loginUser(values);
+      dispatch(updateUserData(userData));
       navigate('/');
     } catch (err) {
       if (err instanceof Error) {

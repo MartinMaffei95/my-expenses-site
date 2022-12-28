@@ -1,21 +1,32 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import {
+  AccountsState,
+  TransactionsState,
+} from '../../Interfaces/Redux.interface';
 import { Transaction } from '../../Interfaces/Transaction.interface';
-import { getAllTransactions } from '../../services/Transaction.services';
 import { mapApiToTransaction } from '../../utils/mapApiToTransaction';
+import BasicModal from '../Pure/ModalComponent';
 import { SingleTransaction } from '../Pure/SingleTransaction';
 
 export const TransactionContainer = () => {
   const [transactions, setTransactions] = useState<Array<Transaction>>([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const allTransactions = useSelector(
+    (state: TransactionsState) => state.transactions.transactions
+  );
 
   useEffect(() => {
-    getAllTransactions().then((allT) => {
-      if (allT?.length <= 0) return;
-      const trax = mapApiToTransaction(allT);
-      setTransactions(trax);
-    });
-  }, []);
+    if (allTransactions?.length <= 0) return;
+    const trax = mapApiToTransaction(allTransactions);
+    setTransactions(trax);
+  }, [allTransactions]);
   return (
     <div>
+      <BasicModal open={open} handleClose={handleClose} />
       <div>
         {transactions && transactions.length <= 0 ? (
           <p> No hay transferencias creadas</p>
@@ -24,7 +35,7 @@ export const TransactionContainer = () => {
         )}
       </div>
       <div>
-        <button>Crear</button>
+        <button onClick={handleOpen}>Crear</button>
       </div>
     </div>
   );

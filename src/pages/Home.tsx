@@ -1,10 +1,10 @@
-import AccountsContainer from '../components/Container/AccountsContainer';
+import { useEffect } from 'react';
 import { TransactionContainer } from '../components/Container/TransactionsContainer';
+import { useReloadData } from '../hooks/useReloadData';
 
 const Home = () => {
   return (
     <div>
-      <AccountsContainer />
       <hr />
       <TransactionContainer />
     </div>

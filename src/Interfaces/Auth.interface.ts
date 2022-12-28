@@ -1,3 +1,6 @@
+import { Category } from '../components/Pure/SelectField';
+import { Account } from './Account.interface';
+
 export interface Token {
   token: string;
 }
@@ -6,8 +9,9 @@ export interface User {
   username: string;
   password: string;
   name: string;
-  accounts: string[];
+  accounts: Account[];
   my_categories: string[];
+  categories: Category[];
   createdAt: string;
   updatedAt: string;
 }

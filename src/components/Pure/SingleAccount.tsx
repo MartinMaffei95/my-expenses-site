@@ -1,6 +1,6 @@
 import { Account } from '../../Interfaces/Account.interface';
 
-type AccountProps = {
+export type AccountProps = {
   account: Account;
 };
 const SingleAccount = ({ account }: AccountProps) => {
