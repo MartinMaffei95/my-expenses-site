@@ -11,7 +11,7 @@ import InputField from './InputField';
 import { ModalProps } from './ModalComponent';
 import SelectField from './SelectField';
 
-const CreateTransaction = ({ open, handleClose }: ModalProps) => {
+const CreateTransaction = ({ open, toggleOpenTransaction }: ModalProps) => {
   const { user } = useSelector((state: UserState) => state.user);
   const accounts = useSelector(
     (state: AccountsState) => state.accounts.accounts
@@ -39,7 +39,7 @@ const CreateTransaction = ({ open, handleClose }: ModalProps) => {
     try {
       await saveTransaction(values);
       reloadData();
-      handleClose();
+      toggleOpenTransaction(false);
     } catch (err) {
       if (err instanceof Error) {
         console.log(err.message);

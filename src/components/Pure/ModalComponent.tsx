@@ -17,20 +17,25 @@ const style = {
 
 export type ModalProps = {
   open?: boolean;
-  handleClose: Function;
+  toggleOpenTransaction: Function;
 };
 
-export default function BasicModal({ open, handleClose }: ModalProps) {
+export default function BasicModal({
+  open,
+  toggleOpenTransaction,
+}: ModalProps) {
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={toggleOpenTransaction(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <NewTransactionsContainer handleClose={handleClose} />
+          <NewTransactionsContainer
+            toggleOpenTransaction={toggleOpenTransaction}
+          />
         </Box>
       </Modal>
     </div>

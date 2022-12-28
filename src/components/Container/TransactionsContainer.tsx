@@ -6,14 +6,14 @@ import {
 } from '../../Interfaces/Redux.interface';
 import { Transaction } from '../../Interfaces/Transaction.interface';
 import { mapApiToTransaction } from '../../utils/mapApiToTransaction';
-import BasicModal from '../Pure/ModalComponent';
+import BasicModal, { ModalProps } from '../Pure/ModalComponent';
 import { SingleTransaction } from '../Pure/SingleTransaction';
 
-export const TransactionContainer = () => {
+export const TransactionContainer = ({
+  toggleOpenTransaction,
+  open,
+}: ModalProps) => {
   const [transactions, setTransactions] = useState<Array<Transaction>>([]);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const allTransactions = useSelector(
     (state: TransactionsState) => state.transactions.transactions
@@ -26,7 +26,6 @@ export const TransactionContainer = () => {
   }, [allTransactions]);
   return (
     <div>
-      <BasicModal open={open} handleClose={handleClose} />
       <div>
         {transactions && transactions.length <= 0 ? (
           <p> No hay transferencias creadas</p>
@@ -34,9 +33,9 @@ export const TransactionContainer = () => {
           transactions?.map((t) => <SingleTransaction transaction={t} />)
         )}
       </div>
-      <div>
-        <button onClick={handleOpen}>Crear</button>
-      </div>
+      {/* <div>
+        <button onClick={toggleOpenTransaction(true)}>Crear</button>
+      </div> */}
     </div>
   );
 };

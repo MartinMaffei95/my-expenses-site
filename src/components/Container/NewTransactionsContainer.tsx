@@ -1,10 +1,13 @@
 import CreateTransaction from '../Pure/CreateTransaction';
 import { ModalProps } from '../Pure/ModalComponent';
 
-const NewTransactionsContainer = ({ open, handleClose }: ModalProps) => {
+const NewTransactionsContainer = ({
+  open,
+  toggleOpenTransaction,
+}: ModalProps) => {
   return (
     <div>
-      <CreateTransaction handleClose={handleClose} />
+      <CreateTransaction toggleOpenTransaction={toggleOpenTransaction} />
     </div>
   );
 };
