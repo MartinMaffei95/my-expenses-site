@@ -7,7 +7,7 @@ export interface Transaction {
   value: number;
   account: Account;
   created_by: User;
-  category: Category[];
+  category: Category;
   comment: string;
   transaction_date: string;
   type: string;
@@ -20,10 +20,8 @@ export type AllTransactionResponse = Array<Transaction>;
 export type GetTransactionAXIOSResponse = Transaction[];
 export type GetTransactionResponse = Transaction;
 
-export type PickedTransactionValues = Pick<
-  Transaction,
-  'value' | 'category' | 'type'
->;
+export type PickedTransactionValues = Pick<Transaction, 'value' | 'type'>;
 export interface PostTransactionValues extends PickedTransactionValues {
-  account: string;
+  account: string | Account;
+  category: string | Category;
 }
