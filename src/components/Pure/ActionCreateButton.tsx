@@ -9,6 +9,7 @@ export default function ActionCreateButton({
 }: ModalProps) {
   const fabStyle = {
     position: 'fixed',
+    zIndex: 1000,
     bottom: 16,
     right: 16,
   };

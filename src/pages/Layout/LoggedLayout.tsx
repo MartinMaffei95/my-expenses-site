@@ -12,7 +12,7 @@ type Props = {
 export const LoggedLayout = ({ children }: Props) => {
   const [state, setState] = useState(false);
   //Transaction modal
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const reloadData = useReloadData();
 
@@ -29,28 +29,32 @@ export const LoggedLayout = ({ children }: Props) => {
       ) {
         return;
       }
-
       setState(open);
     };
 
   const toggleOpenTransaction =
     (open: boolean) => (event: KeyboardEvent | MouseEvent) => {
+      console.log('is OPEEEEN:', open);
+      setOpen(open);
       if (
         event.type === 'keydown' &&
         ((event as KeyboardEvent).key === 'Tab' ||
           (event as KeyboardEvent).key === 'Shift')
       ) {
-        return;
+        return setState(open);
       }
-
-      setOpen(open);
     };
 
+  const handleclose = () => setOpen(false);
   return (
     <>
       <NavBar toggleDrawer={toggleDrawer} />
       <LeftMenu toggleDrawer={toggleDrawer} state={state} />
-      <BasicModal open={open} toggleOpenTransaction={toggleOpenTransaction} />
+      <BasicModal
+        open={open}
+        toggleOpenTransaction={toggleOpenTransaction}
+        handleclose={handleclose}
+      />
 
       <ActionCreateButton toggleOpenTransaction={toggleOpenTransaction} />
       {children}

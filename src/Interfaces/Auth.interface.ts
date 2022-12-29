@@ -10,7 +10,7 @@ export interface User {
   password: string;
   name: string;
   accounts: Account[];
-  my_categories: string[];
+  my_categories: Category[];
   categories: Category[];
   createdAt: string;
   updatedAt: string;

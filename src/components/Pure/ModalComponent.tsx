@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Button, Typography, Modal } from '@mui/material';
 import NewTransactionsContainer from '../Container/NewTransactionsContainer';
+import CreateTransaction from './CreateTransaction';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -18,24 +19,35 @@ const style = {
 export type ModalProps = {
   open?: boolean;
   toggleOpenTransaction: Function;
+  handleclose?: Function | undefined;
+  action?: 'EDIT' | 'CREATE';
 };
 
 export default function BasicModal({
   open,
   toggleOpenTransaction,
+  handleclose,
+
+  action = 'CREATE',
 }: ModalProps) {
   return (
     <div>
       <Modal
-        open={open}
+        open={open ? open : false}
         onClose={toggleOpenTransaction(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <NewTransactionsContainer
-            toggleOpenTransaction={toggleOpenTransaction}
-          />
+          {action === 'EDIT' ? (
+            <div>aaaa</div>
+          ) : action === 'CREATE' ? (
+            <CreateTransaction
+              toggleOpenTransaction={toggleOpenTransaction}
+              handleclose={handleclose}
+            />
+          ) : null}
+          {/* <EditTransaction toggleOpenTransaction={toggleOpenTransaction} /> */}
         </Box>
       </Modal>
     </div>

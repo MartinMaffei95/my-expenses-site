@@ -4,6 +4,7 @@ import RegisterPage from './Auth/RegisterPage';
 import Home from './Home';
 import { LoggedLayout } from './Layout/LoggedLayout';
 import { Team } from './Team';
+import EditTransactionPage from './Transaction/EditTransactionPage';
 import NewTransactionPage from './Transaction/NewTransactionPage';
 
 const RequireAuth = () => {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
           {
             path: 'add',
             element: <NewTransactionPage />,
+          },
+          {
+            path: ':id/edit',
+            element: <EditTransactionPage />,
           },
         ],
       },

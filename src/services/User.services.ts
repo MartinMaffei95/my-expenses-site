@@ -18,14 +18,11 @@ export const getUserData = async (): Promise<User> => {
         },
       }
     );
-    console.log(data);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log('error message: ', error.message);
       throw new Error(error.message);
     } else {
-      console.log('unexpected error: ', error);
       throw new Error('An unexpected error occurred');
     }
   }

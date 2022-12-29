@@ -44,11 +44,13 @@ const SelectField = ({
         onChange={handleChange}
       >
         {optGroup && !haveSubCategory
-          ? optGroup.map((opt) => (
-              <option key={opt._id} value={opt._id}>
-                {opt.name}
-              </option>
-            ))
+          ? optGroup.map((opt) => {
+              return (
+                <option key={opt._id} value={opt._id}>
+                  {opt.name}
+                </option>
+              );
+            })
           : null}
 
         {optGroup && haveSubCategory
