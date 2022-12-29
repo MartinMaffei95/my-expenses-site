@@ -1,31 +1,39 @@
 import { useFormik, FormikProps } from 'formik';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { useReloadData } from '../../hooks/useReloadData';
 import { AccountsState, UserState } from '../../Interfaces/Redux.interface';
-import { PostTransactionValues } from '../../Interfaces/Transaction.interface';
-import { saveTransaction } from '../../services/Transaction.services';
+import {
+  PostTransactionValues,
+  Transaction,
+} from '../../Interfaces/Transaction.interface';
+import {
+  editTransaction,
+  saveTransaction,
+} from '../../services/Transaction.services';
 import { Type_transaction } from '../../utils/TypeConfig';
 import InputField from './InputField';
-import { ModalProps } from './ModalComponent';
 import SelectField from './SelectField';
 
-const CreateTransaction = ({
-  toggleOpenTransaction,
-  handleclose,
-}: ModalProps) => {
+type EditTransactionProps = {
+  transactionToEdit: Transaction | undefined;
+  id: string;
+};
+
+const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {
   const { user } = useSelector((state: UserState) => state.user);
   const accounts = useSelector(
     (state: AccountsState) => state.accounts.accounts
   );
+  const navigate = useNavigate();
   const { VITE_API_URI } = import.meta.env;
-
   const initialValues = {
-    value: 0,
-    account: accounts[0]._id || '',
-    category: user.my_categories[0]._id || '',
-    type: Type_transaction[0]._id || '',
+    value: transactionToEdit?.value || 0,
+    account: transactionToEdit?.account || '',
+    category: transactionToEdit?.category || '',
+    type: transactionToEdit?.type || '',
   };
 
   const validationSchema = yup.object({
@@ -37,26 +45,22 @@ const CreateTransaction = ({
 
   const reloadData = useReloadData();
 
-  const onSubmit = async () => {
+  const onSubmit = async (): Promise<void> => {
     try {
-      await saveTransaction(values);
-
-      resetForm();
+      if (id === undefined) return;
+      await editTransaction(values, id);
       reloadData();
+      navigate('/');
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err.message);
+        console.error(err.message);
       } else {
-        console.log('Unexpected error', err);
+        console.error('Unexpected error', err);
       }
-    } finally {
-      console.log('aaa');
-      if (handleclose) handleclose();
     }
   };
 
   const {
-    resetForm,
     handleSubmit,
     handleChange,
     handleBlur,
@@ -72,7 +76,7 @@ const CreateTransaction = ({
   useEffect(() => {}, []);
   return (
     <div>
-      <h3>Crear nueva transaccion</h3>
+      <h3>Editar transaccion</h3>
       <form onSubmit={handleSubmit}>
         <InputField
           label="Monto"
@@ -121,4 +125,4 @@ const CreateTransaction = ({
   );
 };
 
-export default CreateTransaction;
+export default EditTransaction;

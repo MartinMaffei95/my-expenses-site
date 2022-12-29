@@ -1,9 +1,13 @@
+import { Category } from '../components/Pure/SelectField';
+import { Account } from './Account.interface';
+import { User } from './Auth.interface';
+
 export interface Transaction {
   _id: string;
   value: number;
-  account: string;
-  created_by: string;
-  category: string;
+  account: Account;
+  created_by: User;
+  category: Category[];
   comment: string;
   transaction_date: string;
   type: string;
@@ -13,7 +17,13 @@ export interface Transaction {
 
 export type AllTransactionResponse = Array<Transaction>;
 
-export type PostTransactionValues = Pick<
+export type GetTransactionAXIOSResponse = Transaction[];
+export type GetTransactionResponse = Transaction;
+
+export type PickedTransactionValues = Pick<
   Transaction,
-  'value' | 'account' | 'category' | 'type'
+  'value' | 'category' | 'type'
 >;
+export interface PostTransactionValues extends PickedTransactionValues {
+  account: string;
+}
