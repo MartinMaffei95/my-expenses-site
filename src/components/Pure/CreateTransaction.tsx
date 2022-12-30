@@ -21,7 +21,7 @@ const CreateTransaction = ({
   );
   const { VITE_API_URI } = import.meta.env;
 
-  const initialValues = {
+  const initialValues: PostTransactionValues = {
     value: 0,
     account: accounts[0]._id || '',
     category: user.my_categories[0]._id || '',

@@ -18,7 +18,7 @@ interface SelectField {
   inputName: string;
   optGroup?: Options['categories'];
   haveSubCategory?: boolean;
-  value: string;
+  value: string | any;
   handleChange: ChangeEventHandler<HTMLSelectElement>;
   handleBlur: FocusEventHandler<HTMLSelectElement>;
   errorMessage?: string | null;

@@ -19,7 +19,7 @@ import SelectField from './SelectField';
 
 type EditTransactionProps = {
   transactionToEdit: Transaction | undefined;
-  id: string;
+  id: string | undefined;
 };
 
 const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {

@@ -11,7 +11,7 @@ const EditTransactionPage = () => {
   >(undefined);
   useEffect(() => {
     if (id === undefined) return;
-    getTransaction(id).then((res) => setTransactionToEdit(res));
+    getTransaction(`${id}`).then((res) => setTransactionToEdit(res));
     console.log(transactionToEdit);
   }, []);
   return (
