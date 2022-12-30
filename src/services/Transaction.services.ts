@@ -11,7 +11,7 @@ import {
 const { VITE_API_URI } = import.meta.env;
 
 type TransactionsProps = {
-  transaction_id: Readonly<Params<string>> | string;
+  transaction_id: Readonly<Params<string>> | string | undefined;
 };
 
 export const getAllTransactions = async (): Promise<AllTransactionResponse> => {
@@ -37,7 +37,7 @@ export const getAllTransactions = async (): Promise<AllTransactionResponse> => {
 };
 
 export const getTransaction = async (
-  transaction_id: TransactionsProps
+  transaction_id: string
 ): Promise<GetTransactionResponse> => {
   try {
     const { data, status } = await axios.get<GetTransactionAXIOSResponse>(
