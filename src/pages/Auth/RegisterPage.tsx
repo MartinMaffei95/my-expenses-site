@@ -1,11 +1,16 @@
 import { useFormik, FormikProps } from 'formik';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import AuthFormContainer from '../../components/Container/AuthFormContainer';
+import AuthSubmitBtn from '../../components/Pure/authSubmitBtn';
 import InputField from '../../components/Pure/InputField';
 import { RegisterValues } from '../../Interfaces/Auth.interface';
 import { registerUser } from '../../services/Auth.services';
+import { AuthLayout } from './AuthLayout';
 
 const RegisterPage = () => {
+  const navigate: NavigateFunction = useNavigate();
+
   const initialValues = {
     name: '',
     username: '',
@@ -24,6 +29,7 @@ const RegisterPage = () => {
 
   const onSubmit = (): void => {
     registerUser(values);
+    navigate('login');
   };
 
   const {
@@ -39,61 +45,87 @@ const RegisterPage = () => {
     validationSchema,
   });
   return (
-    <div>
-      <h3>Login</h3>
+    <AuthLayout>
+      <h3 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+        Register
+      </h3>
       <AuthFormContainer>
-        <form onSubmit={handleSubmit}>
-          <InputField
-            label="Nombre"
-            inputName="name"
-            value={values.name}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            errorMessage={touched.name && errors.name ? errors.name : null}
-          />
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <div className="-space-y-px rounded-md shadow-sm">
+            <InputField
+              label="Nombre"
+              placeholder="Nombre"
+              inputName="name"
+              labelClassname="sr-only"
+              inputClassname={'input-style'}
+              value={values.name}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              errorMessage={touched.name && errors.name ? errors.name : null}
+            />
 
-          <InputField
-            label="Nombre de usuario"
-            inputName="username"
-            value={values.username}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            errorMessage={
-              touched.username && errors.username ? errors.username : null
-            }
-          />
+            <InputField
+              label="Nombre de usuario"
+              placeholder="Nombre de usuario"
+              inputName="username"
+              labelClassname="sr-only"
+              inputClassname={'input-style'}
+              value={values.username}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              errorMessage={
+                touched.username && errors.username ? errors.username : null
+              }
+            />
 
-          {/* PASS */}
+            {/* PASS */}
 
-          <InputField
-            label="Ingresá tu contraseña"
-            inputName="password"
-            value={values.password}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            errorMessage={
-              touched.password && errors.password ? errors.password : null
-            }
-          />
-          <InputField
-            label="Ingresá nuevamente tu contraseña"
-            inputName="passwordConfirmation"
-            value={values.passwordConfirmation}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            errorMessage={
-              touched.passwordConfirmation && errors.passwordConfirmation
-                ? errors.passwordConfirmation
-                : null
-            }
-          />
+            <InputField
+              label="Ingresá tu contraseña"
+              placeholder="Ingresá tu contraseña"
+              inputName="password"
+              labelClassname="sr-only"
+              inputClassname={'input-style'}
+              value={values.password}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              errorMessage={
+                touched.password && errors.password ? errors.password : null
+              }
+            />
+            <InputField
+              label="Ingresá nuevamente tu contraseña"
+              placeholder="Ingresá nuevamente tu contraseña"
+              inputName="passwordConfirmation"
+              labelClassname="sr-only"
+              inputClassname={'input-style'}
+              value={values.passwordConfirmation}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              errorMessage={
+                touched.passwordConfirmation && errors.passwordConfirmation
+                  ? errors.passwordConfirmation
+                  : null
+              }
+            />
+          </div>
 
           <div>
-            <button type="submit">Enviar</button>
+            <AuthSubmitBtn btnText="Crear" />
+          </div>
+          <div className="flex items-center justify-center ">
+            <div className="text-sm">
+              <Link
+                to="/auth/login"
+                className="font-medium text-primary-600 hover:text-primary-500"
+              >
+                Ya tienes una cuenta? Accede aqui
+              </Link>
+            </div>
           </div>
         </form>
       </AuthFormContainer>
-    </div>
+    </AuthLayout>
   );
 };
 
