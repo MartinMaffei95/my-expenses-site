@@ -81,12 +81,16 @@ const CreateAccount = () => {
 
   useEffect(() => {}, []);
   return (
-    <div>
-      <h3>Crear nueva cuenta</h3>
+    <div className="pl-2 pr-2">
+      <h3 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+        Crear nueva cuenta
+      </h3>
       <form onSubmit={handleSubmit}>
         <InputField
           label="Nombre"
+          labelClassname="label-style"
           inputName="name"
+          inputClassname={'input-style'}
           value={values.name}
           handleBlur={handleBlur}
           handleChange={handleChange}
@@ -95,6 +99,8 @@ const CreateAccount = () => {
         <InputField
           label="Descripcion de la cuenta"
           inputName="description"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.description}
           handleBlur={handleBlur}
           handleChange={handleChange}
@@ -107,6 +113,8 @@ const CreateAccount = () => {
         <InputField
           label="Saldo inicial"
           inputName="initial_balance"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.initial_balance}
           handleBlur={handleBlur}
           handleChange={handleChange}
@@ -119,6 +127,8 @@ const CreateAccount = () => {
         <SelectField
           label="Moneda"
           inputName="type"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.type}
           optGroup={appSettings?.accountList}
           handleBlur={handleBlur}
@@ -128,6 +138,8 @@ const CreateAccount = () => {
         <SelectField
           label="Tipo de cuenta"
           inputName="currency"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.currency}
           optGroup={appSettings?.currencyList}
           handleBlur={handleBlur}
@@ -137,15 +149,19 @@ const CreateAccount = () => {
           }
         />
 
-        <ColorPicker
-          name={'color'}
-          value={values?.color}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
-          setFieldValue={setFieldValue}
-        />
-
-        <button type="submit">Guardar</button>
+        <div>
+          <p className="label-style">Color</p>
+          <ColorPicker
+            name={'color'}
+            value={values?.color}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
+          />
+        </div>
+        <button className="btn-input font-bold text-lg mt-2 mb-2" type="submit">
+          Guardar
+        </button>
       </form>
     </div>
   );
