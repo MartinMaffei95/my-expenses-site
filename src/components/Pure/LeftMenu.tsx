@@ -13,6 +13,10 @@ import { AccountsState } from '../../Interfaces/Redux.interface';
 import { mapApiToAccount } from '../../utils/mapApiToAccount';
 import { Account } from '../../Interfaces/Account.interface';
 import { AccountItemMenu } from './AccountItemMenu';
+import AccountAdminPanel from './AccountAdminPanel';
+import { Collapse } from '@mui/material';
+import { MdExpandMore, MdOutlineList } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 export type LeftMenuProps = {
   toggleDrawer: Function;
@@ -22,9 +26,21 @@ export type LeftMenuProps = {
 export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
   const [accounts, setAccounts] = React.useState<Array<Account>>([]);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
   const allAccounts = useSelector(
     (state: AccountsState) => state.accounts.accounts
   );
+
+  const navigate = useNavigate();
+
+  const toPage = (url: string) => {
+    navigate(`${url}`);
+    toggleDrawer(false);
+  };
 
   React.useEffect(() => {
     if (allAccounts?.length <= 0) return;
@@ -36,10 +52,24 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
     <Box
       sx={{ width: 250 }}
       role="presentation"
-      onClick={toggleDrawer(false)}
+      // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => toPage('/')}>Home</ListItemButton>
+        </ListItem>
+        {/* Account admin panel */}
+        <ListItemButton onClick={handleClick}>
+          <ListItemIcon>
+            <MdExpandMore />
+          </ListItemIcon>
+          <ListItemText primary="Administrar cuentas" />
+        </ListItemButton>
+
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <AccountAdminPanel redirectFx={toPage} />
+        </Collapse>
         {/* Todo inster array of accounts */}
         {accounts.map((acc) => (
           <AccountItemMenu account={acc} />

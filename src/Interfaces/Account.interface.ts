@@ -19,3 +19,16 @@ export interface Account {
 }
 
 export type AllAccountsResponse = Array<Account>;
+
+export type NewAccountValues = Pick<
+  Account,
+  | 'name'
+  | 'description'
+  | 'balance'
+  | 'initial_balance'
+  | 'currency'
+  | 'type'
+  | 'color'
+>;
+
+export interface PostNewAccountValues extends NewAccountValues {}

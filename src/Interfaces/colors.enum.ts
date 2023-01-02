@@ -1,5 +1,3 @@
-import { string } from 'yup';
-
 export type ColorOpt = {
   name: string;
   rgb: string;

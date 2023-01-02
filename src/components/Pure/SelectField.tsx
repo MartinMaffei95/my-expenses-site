@@ -1,4 +1,5 @@
-import { ChangeEventHandler, FocusEventHandler } from 'react';
+import { ChangeEventHandler, FocusEventHandler, SetStateAction } from 'react';
+import { NewAccountValues } from '../../Interfaces/Account.interface';
 
 export type Category = {
   _id: string;
@@ -22,6 +23,7 @@ interface SelectField {
   handleChange: ChangeEventHandler<HTMLSelectElement>;
   handleBlur: FocusEventHandler<HTMLSelectElement>;
   errorMessage?: string | null;
+  setValues?: SetStateAction<NewAccountValues>;
 }
 
 const SelectField = ({
@@ -33,6 +35,7 @@ const SelectField = ({
   handleBlur,
   handleChange,
   errorMessage,
+  setValues,
 }: SelectField) => {
   return (
     <div>
@@ -46,9 +49,17 @@ const SelectField = ({
         {optGroup && !haveSubCategory
           ? optGroup.map((opt) => {
               return (
-                <option key={opt._id} value={opt._id}>
-                  {opt.name}
-                </option>
+                <>
+                  {opt._id === undefined || opt._id === '' ? (
+                    <option key={''} value={''}>
+                      {''}
+                    </option>
+                  ) : (
+                    <option key={opt._id} value={opt._id}>
+                      {opt.name}
+                    </option>
+                  )}
+                </>
               );
             })
           : null}

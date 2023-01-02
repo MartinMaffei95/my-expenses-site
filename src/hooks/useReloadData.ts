@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { updateAccounts } from '../redux/accountsSlice';
+import { loadSettings } from '../redux/appSettings';
 import { updateTransactions } from '../redux/transactionsSlice';
 import { updateUserData } from '../redux/userSlice';
 import { getAllAccounts } from '../services/Account.services';
@@ -12,6 +13,7 @@ export const useReloadData = () => {
   return () => {
     getUserData().then((res) => {
       dispatch(updateUserData(res));
+      dispatch(loadSettings(res));
     });
     getAllTransactions().then((res) => {
       dispatch(updateTransactions(res));

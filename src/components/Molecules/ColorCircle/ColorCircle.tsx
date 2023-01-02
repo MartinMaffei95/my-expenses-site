@@ -4,7 +4,7 @@ type ColorCircle = {
   isConfig: boolean;
   selected?: string;
   color: string;
-  value?: [ColorOpt];
+  value?: string;
   handleClick?: Function;
 };
 
@@ -18,11 +18,13 @@ const ColorCircle = ({
   return (
     <div className="relative overflow-visible">
       <div
-        className={` w-8 h-8 rounded-full cursor-pointer  `}
+        className={` w-8 h-8 rounded-full cursor-pointer ${
+          isConfig ? 'absolute' : ''
+        } `}
         style={{
           background: color,
           border: isConfig
-            ? value && selected === value[0].name
+            ? value && selected === value
               ? `solid 2px ${color}`
               : 'none'
             : `solid 2px ${color}`,
@@ -33,15 +35,12 @@ const ColorCircle = ({
       ></div>
       {isConfig ? (
         <div
-          className={` w-8 h-8 rounded-full cursor-pointer absolute ${
-            value && selected === value[0].name ? 'animate-ping ' : ''
-          }`}
+          className={` w-8 h-8 rounded-full cursor-pointer ${
+            !isConfig ? 'absolute' : ''
+          }  ${value && selected === value ? 'animate-ping ' : ''}`}
           style={{
             background: color,
-            border:
-              value && selected === value[0].name
-                ? `solid 2px ${color}`
-                : 'none',
+            border: value && selected === value ? `solid 2px ${color}` : 'none',
           }}
         ></div>
       ) : null}
