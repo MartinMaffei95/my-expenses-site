@@ -40,18 +40,12 @@ const CreateAccount = () => {
 
   const reloadData = useReloadData();
 
-  const testSubmit = (e: any) => {
-    e.preventDefault();
-    values.balance = values.initial_balance;
-
-    console.log(values);
-  };
   const onSubmit = async () => {
     try {
       values.balance = values.initial_balance;
       await createAccount(values);
-      // resetForm();
-      // reloadData();
+      resetForm();
+      reloadData();
     } catch (err) {
       if (err instanceof Error) {
         console.log(err.message);
