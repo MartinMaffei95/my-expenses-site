@@ -10,7 +10,17 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserData } from '../../redux/userSlice';
 import { getUserData } from '../../services/User.services';
+import { AuthLayout } from './AuthLayout';
+import AuthSubmitBtn from '../../components/Pure/authSubmitBtn';
+import { useState } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 const LoginPage = () => {
+  const [isEncrypt, setIsEncrypt] = useState<boolean>(true);
+
+  const toggleEncrypt = () => {
+    setIsEncrypt(!isEncrypt);
+  };
+
   const dispatch = useDispatch();
 
   const { VITE_API_URI } = import.meta.env;
@@ -54,40 +64,87 @@ const LoginPage = () => {
     validationSchema,
   });
   return (
-    <div>
-      <h3>Login</h3>
+    <AuthLayout>
+      <h3 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+        Login
+      </h3>
       <AuthFormContainer>
-        <form onSubmit={handleSubmit}>
-          <InputField
-            label="Nombre de usuario"
-            inputName="username"
-            value={values.username}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            errorMessage={
-              touched.username && errors.username ? errors.username : null
-            }
-          />
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <div className="-space-y-px rounded-md shadow-sm">
+            <InputField
+              placeholder={'Nombre de usuario'}
+              labelClassname="sr-only"
+              inputClassname={'input-style'}
+              label="Nombre de usuario"
+              inputName="username"
+              value={values.username}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              errorMessage={
+                touched.username && errors.username ? errors.username : null
+              }
+            />
 
-          {/* PASS */}
+            {/* PASS */}
 
-          <InputField
-            label="Ingresá tu contraseña"
-            inputName="password"
-            value={values.password}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            errorMessage={
-              touched.password && errors.password ? errors.password : null
-            }
-          />
-
+            <InputField
+              label="Ingresá tu contraseña"
+              placeholder="Ingresá tu contraseña"
+              inputName="password"
+              labelClassname="sr-only"
+              inputClassname={'input-style'}
+              type={isEncrypt ? 'password' : 'text'}
+              value={values.password}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              icon={isEncrypt ? <FiEyeOff /> : <FiEye />}
+              iconFX={toggleEncrypt}
+              iconPosition="right"
+              errorMessage={
+                touched.password && errors.password ? errors.password : null
+              }
+            />
+          </div>
+          {/* <div className="flex items-center justify-center ">
+             <div className="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+              />
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
+                Remember me
+              </label>
+            </div> 
+            <div className="text-sm">
+              <a
+                href="#"
+                className="font-medium text-primary-600 hover:text-primary-500"
+              >
+                Olvidaste tu constraseña?
+              </a>
+            </div>
+          </div> */}
           <div>
-            <button type="submit">Enviar</button>
+            <AuthSubmitBtn btnText="Ingresar" />
           </div>
         </form>
+        <div className="flex items-center justify-center ">
+          <div className="text-sm">
+            <a
+              href="/auth/register"
+              className="font-medium text-primary-600 hover:text-primary-500"
+            >
+              Aún no tienes cuenta? Creala aqui!
+            </a>
+          </div>
+        </div>
       </AuthFormContainer>
-    </div>
+    </AuthLayout>
   );
 };
 
