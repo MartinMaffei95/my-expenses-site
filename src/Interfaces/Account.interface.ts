@@ -3,6 +3,9 @@ export interface Account {
   _id: string;
   description: string;
   balance: number;
+  initial_balance: number;
+  total_expenses: number;
+  total_income: number;
   currency: string;
   type: string;
   tags: string[];
@@ -16,3 +19,16 @@ export interface Account {
 }
 
 export type AllAccountsResponse = Array<Account>;
+
+export type NewAccountValues = Pick<
+  Account,
+  | 'name'
+  | 'description'
+  | 'balance'
+  | 'initial_balance'
+  | 'currency'
+  | 'type'
+  | 'color'
+>;
+
+export interface PostNewAccountValues extends NewAccountValues {}

@@ -21,7 +21,7 @@ const AccountsContainer = () => {
   return (
     <div>
       Todas mis cuentas llenas de goldddd
-      <div>
+      <div className="border-solid border-black border-2 w-full">
         {accounts && accounts.length <= 0 ? (
           <p> No hay cuentas para mostrar</p>
         ) : (

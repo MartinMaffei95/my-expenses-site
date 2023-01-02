@@ -1,29 +1,31 @@
 import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { AccountProps } from './SingleAccount';
-import { Box } from '@mui/system';
+import ColorCircle from '../Molecules/ColorCircle/ColorCircle';
+import AccountResume from '../Molecules/AccountResume';
 
 export const AccountItemMenu = ({ account }: AccountProps) => {
   return (
     <ListItem disablePadding>
       <ListItemButton>
-        <div className="border">
+        <div className="w-full">
           {/* use color for item background  */}
-          <p>{account.color}</p>
-          <p>{account.name}</p>
+          <div className="flex justify-center items-end gap-2">
+            <ColorCircle isConfig={false} color={account.color} />
+            <p>{account.name}</p>
+          </div>
+
           <div>
             {account.currency} - {account.type}
           </div>
-          <p style={{ color: `${account?.balance > 0 ? 'green' : 'red'}` }}>
-            {`${
-              account?.balance > 0
-                ? `$ ${account?.balance}`
-                : `-$ ${account?.balance}`
-            }`}
-          </p>
+          {/* account resume */}
+          <AccountResume
+            initial_balance={account.initial_balance}
+            total_expenses={account.total_expenses}
+            total_income={account.total_income}
+            balance={account.balance}
+          />
         </div>
       </ListItemButton>
     </ListItem>
