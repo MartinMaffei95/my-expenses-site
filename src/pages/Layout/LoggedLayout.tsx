@@ -34,7 +34,6 @@ export const LoggedLayout = ({ children }: Props) => {
 
   const toggleOpenTransaction =
     (open: boolean) => (event: KeyboardEvent | MouseEvent) => {
-      console.log('is OPEEEEN:', open);
       setOpen(open);
       if (
         event.type === 'keydown' &&

@@ -1,4 +1,5 @@
-import { ChangeEventHandler, FocusEventHandler } from 'react';
+import { ChangeEventHandler, FocusEventHandler, SetStateAction } from 'react';
+import { NewAccountValues } from '../../Interfaces/Account.interface';
 
 export type Category = {
   _id: string;
@@ -19,36 +20,60 @@ interface SelectField {
   optGroup?: Options['categories'];
   haveSubCategory?: boolean;
   value: string | any;
+  placeholder?: string;
+
   handleChange: ChangeEventHandler<HTMLSelectElement>;
   handleBlur: FocusEventHandler<HTMLSelectElement>;
   errorMessage?: string | null;
+  inputClassname?: string;
+  labelClassname?: string;
+  setValues?: SetStateAction<NewAccountValues>;
 }
 
 const SelectField = ({
   label,
   inputName,
   value,
+  placeholder,
+
   optGroup,
   haveSubCategory = false,
   handleBlur,
   handleChange,
   errorMessage,
+  inputClassname,
+  labelClassname,
+  setValues,
 }: SelectField) => {
   return (
     <div>
-      <label htmlFor={inputName}>{label}</label>
+      <label
+        htmlFor={inputName}
+        className={labelClassname ? `${labelClassname}` : ''}
+      >
+        {label}
+      </label>
       <select
         name={inputName}
         value={value}
         onBlur={handleBlur}
         onChange={handleChange}
+        className={inputClassname ? `${inputClassname}` : ''}
       >
         {optGroup && !haveSubCategory
           ? optGroup.map((opt) => {
               return (
-                <option key={opt._id} value={opt._id}>
-                  {opt.name}
-                </option>
+                <>
+                  {opt._id === undefined || opt._id === '' ? (
+                    <option key={''} value={''}>
+                      {''}
+                    </option>
+                  ) : (
+                    <option key={opt._id} value={opt._id}>
+                      {opt.name}
+                    </option>
+                  )}
+                </>
               );
             })
           : null}

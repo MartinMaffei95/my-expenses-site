@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import NewAccountPage from './Account/NewAccountPage';
 import LoginPage from './Auth/LoginPage';
 import RegisterPage from './Auth/RegisterPage';
 import Home from './Home';
@@ -44,6 +45,19 @@ const router = createBrowserRouter([
             path: ':id/edit',
             element: <EditTransactionPage />,
           },
+        ],
+      },
+      {
+        path: 'account',
+        children: [
+          {
+            path: 'add',
+            element: <NewAccountPage />,
+          },
+          // {
+          //   path: ':id/edit',
+          //   element: <EditTransactionPage />,
+          // },
         ],
       },
     ],
