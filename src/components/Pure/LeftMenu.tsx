@@ -18,6 +18,7 @@ import { Collapse } from '@mui/material';
 import { MdExpandMore, MdOutlineList } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import AccountsSectionMenu from './AccountsSectionMenu';
+import { BiHomeAlt } from 'react-icons/bi';
 
 export type LeftMenuProps = {
   toggleDrawer: Function;
@@ -58,7 +59,12 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
     >
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => toPage('/')}>Home</ListItemButton>
+          <ListItemButton onClick={() => toPage('/')}>
+            <ListItemIcon>
+              <BiHomeAlt />
+            </ListItemIcon>
+            <ListItemText primary="Inicio" />
+          </ListItemButton>
         </ListItem>
         {/* Account admin panel */}
         <ListItemButton onClick={handleClick}>
@@ -71,14 +77,6 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
         <Collapse className="border-b-4" in={open} timeout="auto" unmountOnExit>
           <AccountAdminPanel redirectFx={toPage} />
         </Collapse>
-        {/* <ListItemButton>
-          <ListItemIcon>
-            <MdExpandMore />
-          </ListItemIcon>
-          <ListItemText primary="Cuentas de efectivo" />
-        </ListItemButton> */}
-
-        {/* Todo inster array of accounts */}
 
         {accounts ? <AccountsSectionMenu accounts={accounts} /> : null}
       </List>

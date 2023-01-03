@@ -1,3 +1,5 @@
+import { Transaction } from './Transaction.interface';
+
 export interface Account {
   name: string;
   _id: string;
@@ -13,7 +15,7 @@ export interface Account {
   from: string;
   created_by: string;
   shared_with: string[];
-  transactions: string[];
+  transactions: Transaction[];
   createdAt: string;
   updatedAt: string;
 }

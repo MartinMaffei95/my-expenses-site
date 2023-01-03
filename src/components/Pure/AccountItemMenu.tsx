@@ -4,10 +4,16 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { AccountProps } from './SingleAccount';
 import ColorCircle from '../Molecules/ColorCircle/ColorCircle';
 import AccountResume from '../Molecules/AccountResume';
+import { useNavigate } from 'react-router-dom';
 
 export const AccountItemMenu = ({ account }: AccountProps) => {
+  const navigate = useNavigate();
+
+  const toPage = (url: string) => {
+    navigate(`${url}`);
+  };
   return (
-    <ListItem disablePadding>
+    <ListItem disablePadding onClick={() => toPage(`/account/${account._id}`)}>
       <ListItemButton>
         <div className="w-full">
           {/* use color for item background  */}

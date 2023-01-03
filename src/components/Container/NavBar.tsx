@@ -52,7 +52,7 @@ export default function NavBar({ toggleDrawer }: LeftMenuProps) {
             <BiMenu />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
+            {/* Photos */}
           </Typography>
           {auth && (
             <div>
