@@ -17,6 +17,8 @@ import AccountAdminPanel from './AccountAdminPanel';
 import { Collapse } from '@mui/material';
 import { MdExpandMore, MdOutlineList } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import AccountsSectionMenu from './AccountsSectionMenu';
+import { BiHomeAlt } from 'react-icons/bi';
 
 export type LeftMenuProps = {
   toggleDrawer: Function;
@@ -25,7 +27,6 @@ export type LeftMenuProps = {
 
 export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
   const [accounts, setAccounts] = React.useState<Array<Account>>([]);
-
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -50,14 +51,20 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
 
   const list = () => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 300 }}
+      className="overflow-y-auto"
       role="presentation"
       // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => toPage('/')}>Home</ListItemButton>
+          <ListItemButton onClick={() => toPage('/')}>
+            <ListItemIcon>
+              <BiHomeAlt />
+            </ListItemIcon>
+            <ListItemText primary="Inicio" />
+          </ListItemButton>
         </ListItem>
         {/* Account admin panel */}
         <ListItemButton onClick={handleClick}>
@@ -67,13 +74,11 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
           <ListItemText primary="Administrar cuentas" />
         </ListItemButton>
 
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse className="border-b-4" in={open} timeout="auto" unmountOnExit>
           <AccountAdminPanel redirectFx={toPage} />
         </Collapse>
-        {/* Todo inster array of accounts */}
-        {accounts.map((acc) => (
-          <AccountItemMenu account={acc} />
-        ))}
+
+        {accounts ? <AccountsSectionMenu accounts={accounts} /> : null}
       </List>
       <Divider />
       <List>

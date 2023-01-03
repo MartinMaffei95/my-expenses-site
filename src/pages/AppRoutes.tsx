@@ -1,7 +1,9 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import AccountPage from './Account/AccountPage';
 import NewAccountPage from './Account/NewAccountPage';
 import LoginPage from './Auth/LoginPage';
 import RegisterPage from './Auth/RegisterPage';
+import Error404 from './Error404';
 import Home from './Home';
 import { LoggedLayout } from './Layout/LoggedLayout';
 import { Team } from './Team';
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
             path: 'add',
             element: <NewAccountPage />,
           },
+          {
+            path: ':id',
+            element: <AccountPage />,
+          },
           // {
           //   path: ':id/edit',
           //   element: <EditTransactionPage />,
@@ -74,6 +80,10 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <Error404 />,
   },
 ]);
 

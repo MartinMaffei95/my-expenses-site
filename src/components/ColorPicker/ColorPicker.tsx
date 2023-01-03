@@ -20,8 +20,6 @@ const ColorPicker = ({
 }: ColorPickerProps) => {
   const [colorPicked, setColorPicked] = useState(value);
   const selectColor = (value: string) => {
-    console.log(value);
-
     setColorPicked(value);
     setFieldValue(name, value);
   };
