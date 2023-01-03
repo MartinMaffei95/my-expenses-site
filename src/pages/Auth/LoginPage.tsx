@@ -14,9 +14,10 @@ import { AuthLayout } from './AuthLayout';
 import AuthSubmitBtn from '../../components/Pure/authSubmitBtn';
 import { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import AuthError from '../../components/authError/AuthError';
 const LoginPage = () => {
   const [isEncrypt, setIsEncrypt] = useState<boolean>(true);
-
+  const [responseError, setResponseError] = useState<string>('');
   const toggleEncrypt = () => {
     setIsEncrypt(!isEncrypt);
   };
@@ -44,9 +45,9 @@ const LoginPage = () => {
       navigate('/');
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err.message);
+        // console.log(err.message, err.name);
+        setResponseError(err.message);
       } else {
-        console.log('Unexpected error', err);
       }
     }
   };
@@ -65,6 +66,7 @@ const LoginPage = () => {
   });
   return (
     <AuthLayout>
+      {responseError !== '' ? <AuthError errorMsg={responseError} /> : <></>}
       <h3 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
         Login
       </h3>

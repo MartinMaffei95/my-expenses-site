@@ -1,6 +1,8 @@
 import { useFormik, FormikProps } from 'formik';
+import { useState } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+import AuthError from '../../components/authError/AuthError';
 import AuthFormContainer from '../../components/Container/AuthFormContainer';
 import AuthSubmitBtn from '../../components/Pure/authSubmitBtn';
 import InputField from '../../components/Pure/InputField';
@@ -10,6 +12,7 @@ import { AuthLayout } from './AuthLayout';
 
 const RegisterPage = () => {
   const navigate: NavigateFunction = useNavigate();
+  const [responseError, setResponseError] = useState<string>('');
 
   const initialValues = {
     name: '',
@@ -27,9 +30,16 @@ const RegisterPage = () => {
       .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden'),
   });
 
-  const onSubmit = (): void => {
-    registerUser(values);
-    navigate('login');
+  const onSubmit = async (): Promise<void> => {
+    try {
+      await registerUser(values);
+      // navigate('login');
+    } catch (err) {
+      if (err instanceof Error) {
+        setResponseError(err.message);
+      } else {
+      }
+    }
   };
 
   const {
@@ -46,6 +56,8 @@ const RegisterPage = () => {
   });
   return (
     <AuthLayout>
+      {responseError !== '' ? <AuthError errorMsg={responseError} /> : <></>}
+
       <h3 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
         Register
       </h3>

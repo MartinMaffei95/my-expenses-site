@@ -35,7 +35,6 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
   useEffect(() => {
     return () => {
       categorizeAccounts(allAccounts);
-      console.log(allAccounts, cashAccounts, bankAccounts, creditCardAccounts);
     };
   }, [accounts]);
   return (

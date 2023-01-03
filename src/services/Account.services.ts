@@ -55,8 +55,6 @@ export const getAccount = async (account_id: string): Promise<Account> => {
 export const createAccount = async (
   values: NewAccountValues
 ): Promise<Account> => {
-  console.log(values);
-
   try {
     const { data, status } = await axios.post<Account>(
       `${VITE_API_URI}/account`,
@@ -69,7 +67,6 @@ export const createAccount = async (
         },
       }
     );
-    console.log(data);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

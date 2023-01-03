@@ -35,10 +35,8 @@ export default function AlertDialog({
       toggleAlert(false);
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err.message);
         notificateToast('ERROR', 'Hubo un error! :(');
       } else {
-        console.log('Unexpected error', err);
         notificateToast('ERROR', 'Hubo un error! :(');
       }
     }

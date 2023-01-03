@@ -48,12 +48,9 @@ const CreateAccount = () => {
       reloadData();
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err.message);
       } else {
-        console.log('Unexpected error', err);
       }
     } finally {
-      console.log('aaa');
       // if (handleclose) handleclose();
     }
   };

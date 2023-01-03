@@ -32,7 +32,6 @@ export const TransactionContainer = () => {
     }
   };
   const toggleAlert = (state: boolean, transac?: Transaction) => {
-    console.log(transac, state);
     if (transac) setTransactionObj(transac);
     setAlertOpen(state);
   };
