@@ -72,12 +72,14 @@ const CreateTransaction = ({
   useEffect(() => {}, []);
   return (
     <div>
-      <h3>Crear nueva transaccion</h3>
+      <h3 className="title">Crear nueva transaccion</h3>
       <form onSubmit={handleSubmit}>
         <InputField
           label="Monto"
           inputName="value"
           type="number"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.value}
           handleBlur={handleBlur}
           handleChange={handleChange}
@@ -86,6 +88,8 @@ const CreateTransaction = ({
         <SelectField
           label="Cuenta"
           inputName="account"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           optGroup={accounts}
           value={values.account}
           handleBlur={handleBlur}
@@ -97,6 +101,8 @@ const CreateTransaction = ({
         <SelectField
           label="Categoria"
           inputName="category"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.category}
           optGroup={user.my_categories}
           haveSubCategory
@@ -109,13 +115,17 @@ const CreateTransaction = ({
         <SelectField
           label="Tipo de transferencia"
           inputName="type"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.type}
           optGroup={Type_transaction}
           handleBlur={handleBlur}
           handleChange={handleChange}
           errorMessage={touched.type && errors.type ? errors.type : null}
         />
-        <button type="submit">Guardar</button>
+        <button className="btn-input mt-4" type="submit">
+          Guardar
+        </button>
       </form>
     </div>
   );
