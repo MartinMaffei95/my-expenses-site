@@ -44,7 +44,9 @@ const CategorizedAccountsContainer = ({
       <Collapse className="border-b-4" in={open} timeout="auto" unmountOnExit>
         {!allAccounts
           ? null
-          : allAccounts.map((cAcc) => <AccountItemMenu account={cAcc} />)}
+          : allAccounts.map((cAcc) => (
+              <AccountItemMenu key={cAcc._id} account={cAcc} />
+            ))}
       </Collapse>
     </>
   );

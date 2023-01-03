@@ -57,7 +57,11 @@ export const TransactionContainer = () => {
           <p> No hay transferencias creadas</p>
         ) : (
           transactions?.map((t) => (
-            <SingleTransaction transaction={t} deleteAction={toggleAlert} />
+            <SingleTransaction
+              key={t._id}
+              transaction={t}
+              deleteAction={toggleAlert}
+            />
           ))
         )}
       </div>
