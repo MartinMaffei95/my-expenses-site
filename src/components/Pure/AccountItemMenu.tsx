@@ -11,7 +11,7 @@ export const AccountItemMenu = ({ account }: AccountProps) => {
       <ListItemButton>
         <div className="w-full">
           {/* use color for item background  */}
-          <div className="flex justify-center items-end gap-2">
+          <div className="flex justify-start items-end gap-2">
             <ColorCircle isConfig={false} color={account.color} />
             <p>{account.name}</p>
           </div>

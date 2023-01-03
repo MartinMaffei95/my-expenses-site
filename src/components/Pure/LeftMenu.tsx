@@ -17,6 +17,7 @@ import AccountAdminPanel from './AccountAdminPanel';
 import { Collapse } from '@mui/material';
 import { MdExpandMore, MdOutlineList } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import AccountsSectionMenu from './AccountsSectionMenu';
 
 export type LeftMenuProps = {
   toggleDrawer: Function;
@@ -25,7 +26,6 @@ export type LeftMenuProps = {
 
 export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
   const [accounts, setAccounts] = React.useState<Array<Account>>([]);
-
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -50,7 +50,8 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
 
   const list = () => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 300 }}
+      className="overflow-y-auto"
       role="presentation"
       // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -67,13 +68,19 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
           <ListItemText primary="Administrar cuentas" />
         </ListItemButton>
 
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse className="border-b-4" in={open} timeout="auto" unmountOnExit>
           <AccountAdminPanel redirectFx={toPage} />
         </Collapse>
+        {/* <ListItemButton>
+          <ListItemIcon>
+            <MdExpandMore />
+          </ListItemIcon>
+          <ListItemText primary="Cuentas de efectivo" />
+        </ListItemButton> */}
+
         {/* Todo inster array of accounts */}
-        {accounts.map((acc) => (
-          <AccountItemMenu account={acc} />
-        ))}
+
+        {accounts ? <AccountsSectionMenu accounts={accounts} /> : null}
       </List>
       <Divider />
       <List>
