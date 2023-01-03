@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+  .title {
+    @apply mt-6 text-center text-3xl font-bold tracking-tight text-gray-900;
+  }
+  .subtitle {
+    @apply mt-6 text-center text-xl font-bold tracking-tight text-gray-900;
+  }
   .light-theme {
     @apply bg-gray-50;
   }

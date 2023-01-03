@@ -30,6 +30,28 @@ export const getAllAccounts = async (): Promise<AllAccountsResponse> => {
   }
 };
 
+export const getAccount = async (account_id: string): Promise<Account> => {
+  try {
+    const { data, status } = await axios.get<Account>(
+      `${VITE_API_URI}/account/${account_id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem('token') || '{}'
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data);
+    } else {
+      throw new Error('UNEXPECTED ERROR');
+    }
+  }
+};
+
 export const createAccount = async (
   values: NewAccountValues
 ): Promise<Account> => {

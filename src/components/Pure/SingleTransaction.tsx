@@ -14,7 +14,7 @@ export const SingleTransaction = ({
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col bg-dominantColor-400 m-2  rounded-xl p-2 pl-3 relative overflow-hidden border-gray-300 border-2">
+    <div className="flex flex-col bg-dominantColor-400 m-2  rounded-xl p-2 pl-3 relative overflow-hidden shadow-lg">
       <div
         className={`w-2 h-full inset-0 absolute `}
         style={{
