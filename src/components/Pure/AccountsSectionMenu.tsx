@@ -17,13 +17,13 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
       const account = accounts[i];
       switch (account.type) {
         case 'CASH':
-          setCashAccounts([...cashAccounts, account]);
+          setCashAccounts((prevState) => [...prevState, account]);
           break;
         case 'BANK_ACCOUNT':
-          setBankAccounts([...bankAccounts, account]);
+          setBankAccounts((prevState) => [...prevState, account]);
           break;
         case 'CREDIT_CARD':
-          setCreditCardAccounts([...creditCardAccounts, account]);
+          setCreditCardAccounts((prevState) => [...prevState, account]);
           break;
 
         default:
@@ -33,7 +33,10 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
   };
 
   useEffect(() => {
-    categorizeAccounts(allAccounts);
+    return () => {
+      categorizeAccounts(allAccounts);
+      console.log(allAccounts, cashAccounts, bankAccounts, creditCardAccounts);
+    };
   }, [accounts]);
   return (
     <>

@@ -32,13 +32,6 @@ export const AccountItemMenu = ({ account }: AccountProps) => {
             total_income={account.total_income}
             balance={account.balance}
           />
-          {/* account resume */}
-          <AccountResume
-            initial_balance={account.initial_balance}
-            total_expenses={account.total_expenses}
-            total_income={account.total_income}
-            balance={account.balance}
-          />
         </div>
       </ListItemButton>
     </ListItem>
