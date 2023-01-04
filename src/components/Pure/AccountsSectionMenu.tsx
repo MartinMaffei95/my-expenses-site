@@ -17,6 +17,7 @@ const AccountsSectionMenu = () => {
   );
 
   const categorizeAccounts = (accounts: Account[]) => {
+    console.log(accounts, accounts.length);
     if (accounts.length <= 0) return;
     for (let i = 0; i < accounts.length; i++) {
       const account = accounts[i];
