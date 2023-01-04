@@ -39,21 +39,21 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
   }, [accounts]);
   return (
     <>
-      {cashAccounts && cashAccounts.length > 0 ? (
+      {cashAccounts ? (
         <CategorizedAccountsContainer
           categoryIcon={<BsCashCoin />}
           accounts={cashAccounts}
           accordionText="Cuentas en efectivo"
         />
       ) : null}
-      {bankAccounts && bankAccounts.length > 0 ? (
+      {bankAccounts ? (
         <CategorizedAccountsContainer
           categoryIcon={<BsBank />}
           accounts={bankAccounts}
           accordionText="Cuentas bancarias"
         />
       ) : null}
-      {creditCardAccounts && creditCardAccounts.length > 0 ? (
+      {creditCardAccounts ? (
         <CategorizedAccountsContainer
           categoryIcon={<BsCreditCard />}
           accounts={creditCardAccounts}
