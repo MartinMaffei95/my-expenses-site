@@ -10,6 +10,7 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
   const [cashAccounts, setCashAccounts] = useState<Account[]>([]);
   const [bankAccounts, setBankAccounts] = useState<Account[]>([]);
   const [creditCardAccounts, setCreditCardAccounts] = useState<Account[]>([]);
+  console.log(accounts);
   const categorizeAccounts = (accounts: Account[]) => {
     if (accounts.length <= 0) return;
     for (let i = 0; i < accounts.length; i++) {
@@ -34,26 +35,27 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
   useEffect(() => {
     return () => {
       categorizeAccounts(allAccounts);
+      setAllAccounts(accounts);
       console.log(allAccounts, cashAccounts, bankAccounts, creditCardAccounts);
     };
   }, [accounts]);
   return (
     <>
-      {cashAccounts ? (
+      {cashAccounts && cashAccounts.length > 0 ? (
         <CategorizedAccountsContainer
           categoryIcon={<BsCashCoin />}
           accounts={cashAccounts}
           accordionText="Cuentas en efectivo"
         />
       ) : null}
-      {bankAccounts ? (
+      {bankAccounts && bankAccounts.length > 0 ? (
         <CategorizedAccountsContainer
           categoryIcon={<BsBank />}
           accounts={bankAccounts}
           accordionText="Cuentas bancarias"
         />
       ) : null}
-      {creditCardAccounts ? (
+      {creditCardAccounts && creditCardAccounts.length > 0 ? (
         <CategorizedAccountsContainer
           categoryIcon={<BsCreditCard />}
           accounts={creditCardAccounts}
