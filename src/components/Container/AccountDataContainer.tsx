@@ -1,6 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  IconButton,
+} from '@mui/material';
 import { useState } from 'react';
 import { BsFillTrashFill, BsPencil } from 'react-icons/bs';
+import { MdSettings } from 'react-icons/md';
 import { useNavigate } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 import { Account } from '../../Interfaces/Account.interface';
@@ -16,9 +22,9 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
   type ResumeTransactionsProps = {
     transactions: Transaction[];
   };
-  const ResumeTransactions = ({ transactions }: ResumeTransactionsProps) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const ResumeTransactions = ({ transactions }: ResumeTransactionsProps) => {
     const [alertOpen, setAlertOpen] = useState<boolean>(false);
     const [transactionObj, setTransactionObj] = useState<
       Transaction | undefined
@@ -88,18 +94,23 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
   };
 
   return (
-    <div>
+    <div className="p-2 label-style flex flex-col gap-4 ">
       <div
-        className={`flex-col items-center justify-center`}
-        style={{ boxShadow: `0 4px 4px .5px ${account.color}` }}
+        className={`flex flex-col items-center justify-center shadow-lg relative`}
       >
+        <button
+          className="absolute top-2 right-2 text-3xl text-gray-500"
+          onClick={() => navigate(`edit`)}
+        >
+          <MdSettings />
+        </button>
         <h3 className="title">{account.name}</h3>
-        <span className="label-style">
+        <span>
           {account.currency} - {account.type}
         </span>
         {account.description ? <p>{account.description}</p> : null}
       </div>
-      <div className="label-style">
+      <div className="label-style shadow-lg">
         <h4 className="subtitle">Resumen</h4>
 
         <AccountResume
@@ -109,11 +120,13 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
           balance={account.total_expenses}
         />
       </div>
-      <div>
+      <div className="label-style shadow-lg">
         {account.transactions && account.transactions.length > 0 ? (
           <ResumeTransactions transactions={account.transactions} />
         ) : (
-          <p className="label-style">No hay movimientos aun</p>
+          <p className="label-style flex justify-center items-center bg-">
+            No hay movimientos aun
+          </p>
         )}
       </div>
     </div>

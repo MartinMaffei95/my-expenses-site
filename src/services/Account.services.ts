@@ -4,6 +4,7 @@ import {
   Account,
   AllAccountsResponse,
   NewAccountValues,
+  PostNewAccountValues,
 } from '../Interfaces/Account.interface';
 
 const { VITE_API_URI } = import.meta.env;
@@ -58,6 +59,32 @@ export const createAccount = async (
   try {
     const { data, status } = await axios.post<Account>(
       `${VITE_API_URI}/account`,
+      values,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem('token') || '{}'
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data);
+    } else {
+      throw new Error('UNEXPECTED ERROR');
+    }
+  }
+};
+
+export const editAccount = async (
+  values: PostNewAccountValues,
+  account_id: string
+) => {
+  try {
+    const { data, status } = await axios.put<Account>(
+      `${VITE_API_URI}/account/${account_id}`,
       values,
       {
         headers: {

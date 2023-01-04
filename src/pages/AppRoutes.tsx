@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 import AccountPage from './Account/AccountPage';
+import EditAccountPage from './Account/EditAccountPage';
 import NewAccountPage from './Account/NewAccountPage';
 import LoginPage from './Auth/LoginPage';
 import RegisterPage from './Auth/RegisterPage';
@@ -60,10 +61,10 @@ const router = createBrowserRouter([
             path: ':id',
             element: <AccountPage />,
           },
-          // {
-          //   path: ':id/edit',
-          //   element: <EditTransactionPage />,
-          // },
+          {
+            path: ':id/edit',
+            element: <EditAccountPage />,
+          },
         ],
       },
     ],
