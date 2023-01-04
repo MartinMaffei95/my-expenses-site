@@ -53,16 +53,34 @@ export default function AlertDialog({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {'Desea eliminar esta transaccion?'}
+          <p className="subtitle">{'Desea eliminar esta transaccion?'}</p>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Estas seguro que deseas eliminar la transaccion :
-            <p>Nro: {transaction?._id}</p>
-            <p>
-              Valor: {transaction?.type} {transaction?.value}{' '}
-              {transaction?.account?.currency}
-            </p>
+            <div className="label-style">
+              Estas seguro que deseas eliminar la transaccion:
+              <p>Categoria: {transaction?.category.name}</p>
+              <p>
+                Valor:{' '}
+                <span
+                  className={`${
+                    transaction?.type === 'SUBSTRACTION'
+                      ? 'text-red-500'
+                      : transaction?.type === 'ADDITION' && 'text-green-600'
+                  }`}
+                >
+                  {transaction?.type === 'SUBSTRACTION'
+                    ? '-$'
+                    : transaction?.type === 'ADDITION' && '$'}
+                  {transaction?.value}
+                </span>{' '}
+                {transaction?.account?.currency}
+              </p>
+              <p className="text-sm text-right text-gray-500">
+                {transaction?.created_by.username}{' '}
+                {transaction?.transaction_date}
+              </p>
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -74,7 +92,9 @@ export default function AlertDialog({
           >
             Cancelar
           </Button>
-          <Button onClick={removeTransaction}>Si, quiero eliminarla</Button>
+          <Button color="error" onClick={removeTransaction}>
+            Si, quiero eliminarla
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -75,12 +75,14 @@ const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {
 
   useEffect(() => {}, []);
   return (
-    <div>
-      <h3>Editar transaccion</h3>
+    <div className="pl-2 pr-2">
+      <h3 className="title">Editar transaccion</h3>
       <form onSubmit={handleSubmit}>
         <InputField
           label="Monto"
           inputName="value"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           type="number"
           value={values.value}
           handleBlur={handleBlur}
@@ -90,6 +92,8 @@ const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {
         <SelectField
           label="Cuenta"
           inputName="account"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           optGroup={accounts}
           value={values.account}
           handleBlur={handleBlur}
@@ -101,6 +105,8 @@ const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {
         <SelectField
           label="Categoria"
           inputName="category"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.category}
           optGroup={user.my_categories}
           haveSubCategory
@@ -113,13 +119,17 @@ const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {
         <SelectField
           label="Tipo de transferencia"
           inputName="type"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
           value={values.type}
           optGroup={Type_transaction}
           handleBlur={handleBlur}
           handleChange={handleChange}
           errorMessage={touched.type && errors.type ? errors.type : null}
         />
-        <button type="submit">Guardar</button>
+        <button className="btn-input font-bold text-lg mt-2 mb-2" type="submit">
+          Guardar
+        </button>
       </form>
     </div>
   );
