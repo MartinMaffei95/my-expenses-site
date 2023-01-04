@@ -77,7 +77,7 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
           <AccountAdminPanel redirectFx={toPage} />
         </Collapse>
 
-        {accounts ? <AccountsSectionMenu accounts={accounts} /> : null}
+        {accounts ? <AccountsSectionMenu /> : null}
       </List>
       <Divider />
       <List>

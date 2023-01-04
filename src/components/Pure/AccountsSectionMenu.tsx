@@ -2,15 +2,20 @@ import { useEffect, useState } from 'react';
 import { Account } from '../../Interfaces/Account.interface';
 import CategorizedAccountsContainer from '../Container/CategorizedAccountsContainer';
 import { BsCashCoin, BsBank, BsCreditCard } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { AccountsState } from '../../Interfaces/Redux.interface';
 export type AccountsSectionMenuProps = {
   accounts: Array<Account>;
 };
-const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
-  const [allAccounts, setAllAccounts] = useState<Account[]>(accounts);
+const AccountsSectionMenu = () => {
   const [cashAccounts, setCashAccounts] = useState<Account[]>([]);
   const [bankAccounts, setBankAccounts] = useState<Account[]>([]);
   const [creditCardAccounts, setCreditCardAccounts] = useState<Account[]>([]);
-  console.log(accounts);
+
+  const allAccounts = useSelector(
+    (state: AccountsState) => state.accounts.accounts
+  );
+
   const categorizeAccounts = (accounts: Account[]) => {
     if (accounts.length <= 0) return;
     for (let i = 0; i < accounts.length; i++) {
@@ -35,10 +40,9 @@ const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
   useEffect(() => {
     return () => {
       categorizeAccounts(allAccounts);
-      setAllAccounts(accounts);
       console.log(allAccounts, cashAccounts, bankAccounts, creditCardAccounts);
     };
-  }, [accounts]);
+  }, [allAccounts]);
   return (
     <>
       {cashAccounts && cashAccounts.length > 0 ? (
