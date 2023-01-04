@@ -23,16 +23,19 @@ const AccountsSectionMenu = () => {
       const account = accounts[i];
       switch (account.type) {
         case 'CASH':
-          console.log(account);
-          setCashAccounts((prevState) => [...prevState, account]);
+          let cashArr = [...cashAccounts];
+          cashArr.push(account);
+          setCashAccounts(cashArr);
           break;
         case 'BANK_ACCOUNT':
-          console.log(account);
-          setBankAccounts((prevState) => [...prevState, account]);
+          let bankArr = [...bankAccounts];
+          bankArr.push(account);
+          setBankAccounts(bankArr);
           break;
         case 'CREDIT_CARD':
-          console.log(account);
-          setCreditCardAccounts((prevState) => [...prevState, account]);
+          let creditArr = [...creditCardAccounts];
+          creditArr.push(account);
+          setCreditCardAccounts(creditArr);
           break;
 
         default:
