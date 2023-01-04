@@ -1,4 +1,5 @@
 import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router';
 import NavBar from '../../components/Container/NavBar';
 import ActionCreateButton from '../../components/Pure/ActionCreateButton';
 import LeftMenu from '../../components/Pure/LeftMenu';
@@ -14,6 +15,9 @@ export const LoggedLayout = ({ children }: Props) => {
   //Transaction modal
   const [open, setOpen] = useState<boolean>(false);
 
+  const loc = useLocation();
+  const routes = ['account', 'transaction'];
+  const includesSome = routes.some((r) => loc.pathname.includes(r));
   const reloadData = useReloadData();
 
   useEffect(() => {
@@ -54,8 +58,9 @@ export const LoggedLayout = ({ children }: Props) => {
         toggleOpenTransaction={toggleOpenTransaction}
         handleclose={handleclose}
       />
-
-      <ActionCreateButton toggleOpenTransaction={toggleOpenTransaction} />
+      {!includesSome ? (
+        <ActionCreateButton toggleOpenTransaction={toggleOpenTransaction} />
+      ) : null}
       {children}
     </>
   );
