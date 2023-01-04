@@ -35,7 +35,7 @@ const useCategorize = () => {
     }
   };
   useEffect(() => {
-    return () => categorizeAccounts(allAccounts);
+    categorizeAccounts(allAccounts);
   }, [allAccounts]);
 
   return { cashAccounts, bankAccounts, creditCardAccounts };
