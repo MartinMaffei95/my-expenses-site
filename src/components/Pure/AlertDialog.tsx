@@ -72,9 +72,9 @@ export default function AlertDialog({
             }}
             autoFocus
           >
-            Disagree
+            Cancelar
           </Button>
-          <Button onClick={removeTransaction}>Agree</Button>
+          <Button onClick={removeTransaction}>Si, quiero eliminarla</Button>
         </DialogActions>
       </Dialog>
     </div>
