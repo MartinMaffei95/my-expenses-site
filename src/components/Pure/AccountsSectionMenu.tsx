@@ -1,42 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Account } from '../../Interfaces/Account.interface';
 import CategorizedAccountsContainer from '../Container/CategorizedAccountsContainer';
 import { BsCashCoin, BsBank, BsCreditCard } from 'react-icons/bs';
+import useCategorize from '../../hooks/useCategorize';
+
 export type AccountsSectionMenuProps = {
   accounts: Array<Account>;
 };
-const AccountsSectionMenu = ({ accounts }: AccountsSectionMenuProps) => {
-  const [allAccounts, setAllAccounts] = useState<Account[]>(accounts);
-  const [cashAccounts, setCashAccounts] = useState<Account[]>([]);
-  const [bankAccounts, setBankAccounts] = useState<Account[]>([]);
-  const [creditCardAccounts, setCreditCardAccounts] = useState<Account[]>([]);
+const AccountsSectionMenu = () => {
+  const { cashAccounts, bankAccounts, creditCardAccounts } = useCategorize();
 
-  const categorizeAccounts = (accounts: Account[]) => {
-    if (accounts.length <= 0) return;
-    for (let i = 0; i < accounts.length; i++) {
-      const account = accounts[i];
-      switch (account.type) {
-        case 'CASH':
-          setCashAccounts((prevState) => [...prevState, account]);
-          break;
-        case 'BANK_ACCOUNT':
-          setBankAccounts((prevState) => [...prevState, account]);
-          break;
-        case 'CREDIT_CARD':
-          setCreditCardAccounts((prevState) => [...prevState, account]);
-          break;
-
-        default:
-          break;
-      }
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      categorizeAccounts(allAccounts);
-    };
-  }, [accounts]);
   return (
     <>
       {cashAccounts && cashAccounts.length > 0 ? (

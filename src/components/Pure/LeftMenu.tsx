@@ -28,7 +28,6 @@ export type LeftMenuProps = {
 export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
   const [accounts, setAccounts] = React.useState<Array<Account>>([]);
   const [open, setOpen] = React.useState(false);
-  console.log(accounts);
   const handleClick = () => {
     setOpen(!open);
   };
@@ -78,7 +77,7 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
           <AccountAdminPanel redirectFx={toPage} />
         </Collapse>
 
-        {accounts ? <AccountsSectionMenu accounts={accounts} /> : null}
+        {accounts ? <AccountsSectionMenu /> : null}
       </List>
       <Divider />
       <List>
