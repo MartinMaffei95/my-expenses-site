@@ -42,10 +42,19 @@ export default function BasicModal({
           {action === 'EDIT' ? (
             <div>aaaa</div>
           ) : action === 'CREATE' ? (
-            <CreateTransaction
-              toggleOpenTransaction={toggleOpenTransaction}
-              handleclose={handleclose}
-            />
+            <>
+              <button
+                onClick={() => handleclose && handleclose()}
+                className="absolute right-0 mr-6 top-0 mt-3"
+              >
+                X
+              </button>
+
+              <CreateTransaction
+                toggleOpenTransaction={toggleOpenTransaction}
+                handleclose={handleclose}
+              />
+            </>
           ) : null}
           {/* <EditTransaction toggleOpenTransaction={toggleOpenTransaction} /> */}
         </Box>
