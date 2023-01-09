@@ -8,10 +8,13 @@ import { BiMenu, BiWrench } from 'react-icons/bi';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { LeftMenuProps } from '../Pure/LeftMenu';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar({ toggleDrawer }: LeftMenuProps) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
@@ -81,7 +84,14 @@ export default function NavBar({ toggleDrawer }: LeftMenuProps) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate('/categories');
+                    handleClose();
+                  }}
+                >
+                  Mis categorias
+                </MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
             </div>

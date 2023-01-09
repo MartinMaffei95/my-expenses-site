@@ -4,6 +4,7 @@ import EditAccountPage from './Account/EditAccountPage';
 import NewAccountPage from './Account/NewAccountPage';
 import LoginPage from './Auth/LoginPage';
 import RegisterPage from './Auth/RegisterPage';
+import Categories from './Categories/Categories';
 import Error404 from './Error404';
 import Home from './Home';
 import { LoggedLayout } from './Layout/LoggedLayout';
@@ -47,6 +48,15 @@ const router = createBrowserRouter([
           {
             path: ':id/edit',
             element: <EditTransactionPage />,
+          },
+        ],
+      },
+      {
+        path: 'categories',
+        children: [
+          {
+            path: '',
+            element: <Categories />,
           },
         ],
       },
