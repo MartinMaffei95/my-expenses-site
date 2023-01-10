@@ -1,6 +1,6 @@
-import { Category } from '../components/Pure/SelectField';
 import { Account } from './Account.interface';
 import { User } from './Auth.interface';
+import { Category } from './Category.interface';
 
 export interface Transaction {
   _id: string;

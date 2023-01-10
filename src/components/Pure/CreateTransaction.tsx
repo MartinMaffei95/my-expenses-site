@@ -2,6 +2,7 @@ import { useFormik, FormikProps } from 'formik';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
+import { useModal } from '../../hooks/useModal';
 import { useReloadData } from '../../hooks/useReloadData';
 import { AccountsState, UserState } from '../../Interfaces/Redux.interface';
 import { PostTransactionValues } from '../../Interfaces/Transaction.interface';
@@ -11,10 +12,7 @@ import InputField from './InputField';
 import { ModalProps } from './ModalComponent';
 import SelectField from './SelectField';
 
-const CreateTransaction = ({
-  toggleOpenTransaction,
-  handleclose,
-}: ModalProps) => {
+const CreateTransaction = () => {
   const { user } = useSelector((state: UserState) => state.user);
   const accounts = useSelector(
     (state: AccountsState) => state.accounts.accounts
@@ -24,7 +22,7 @@ const CreateTransaction = ({
   const initialValues: PostTransactionValues = {
     value: 0,
     account: accounts[0]._id || '',
-    category: user.my_categories[0]._id || '',
+    category: '',
     type: Type_transaction[0]._id || '',
   };
 
@@ -36,6 +34,7 @@ const CreateTransaction = ({
   });
 
   const reloadData = useReloadData();
+  const { handleModal } = useModal();
 
   const onSubmit = async () => {
     try {
@@ -43,12 +42,11 @@ const CreateTransaction = ({
 
       resetForm();
       reloadData();
+      handleModal(false, '');
     } catch (err) {
       if (err instanceof Error) {
       } else {
       }
-    } finally {
-      if (handleclose) handleclose();
     }
   };
 
@@ -101,7 +99,7 @@ const CreateTransaction = ({
           labelClassname="label-style"
           inputClassname={'input-style'}
           value={values.category}
-          optGroup={user.my_categories}
+          optGroup={user?.my_categories}
           haveSubCategory
           handleBlur={handleBlur}
           handleChange={handleChange}

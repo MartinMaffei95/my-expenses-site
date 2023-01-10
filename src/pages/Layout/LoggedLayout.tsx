@@ -1,10 +1,13 @@
 import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import NavBar from '../../components/Container/NavBar';
 import ActionCreateButton from '../../components/Pure/ActionCreateButton';
 import LeftMenu from '../../components/Pure/LeftMenu';
 import BasicModal from '../../components/Pure/ModalComponent';
 import { useReloadData } from '../../hooks/useReloadData';
+import { AppState, ReduxState } from '../../Interfaces/Redux.interface';
+import { toggleModal } from '../../redux/appSlice';
 
 type Props = {
   children?: JSX.Element | undefined;
@@ -16,10 +19,9 @@ export const LoggedLayout = ({ children }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const loc = useLocation();
-  const routes = ['account', 'transaction'];
+  const routes = ['account', 'transaction', 'categories'];
   const includesSome = routes.some((r) => loc.pathname.includes(r));
   const reloadData = useReloadData();
-
   useEffect(() => {
     reloadData();
   }, []);
@@ -53,15 +55,9 @@ export const LoggedLayout = ({ children }: Props) => {
     <>
       <NavBar toggleDrawer={toggleDrawer} />
       <LeftMenu toggleDrawer={toggleDrawer} state={state} />
-      <BasicModal
-        open={open}
-        toggleOpenTransaction={toggleOpenTransaction}
-        handleclose={handleclose}
-      />
-      {!includesSome ? (
-        <ActionCreateButton toggleOpenTransaction={toggleOpenTransaction} />
-      ) : null}
-      {children}
+      <BasicModal />
+      {!includesSome ? <ActionCreateButton /> : null}
+      <div>{children}</div>
     </>
   );
 };

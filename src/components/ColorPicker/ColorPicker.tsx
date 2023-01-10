@@ -7,8 +7,8 @@ type ColorPickerProps = {
   setFieldValue: Function;
   name: string;
   value: string;
-  handleChange: ChangeEventHandler<HTMLSelectElement>;
-  handleBlur: FocusEventHandler<HTMLSelectElement>;
+  handleChange?: ChangeEventHandler<HTMLSelectElement>;
+  handleBlur?: FocusEventHandler<HTMLSelectElement>;
 };
 
 const ColorPicker = ({

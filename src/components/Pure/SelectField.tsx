@@ -1,12 +1,6 @@
 import { ChangeEventHandler, FocusEventHandler, SetStateAction } from 'react';
 import { NewAccountValues } from '../../Interfaces/Account.interface';
-
-export type Category = {
-  _id: string;
-  name: string;
-  icon?: string;
-  sub_category?: Array<Category>;
-};
+import { Category } from '../../Interfaces/Category.interface';
 
 interface Options {
   accounts: Array<Category>;
@@ -24,7 +18,7 @@ interface SelectField {
 
   handleChange: ChangeEventHandler<HTMLSelectElement>;
   handleBlur: FocusEventHandler<HTMLSelectElement>;
-  errorMessage?: string | null;
+  errorMessage?: string[] | string | null | any;
   inputClassname?: string;
   labelClassname?: string;
   setValues?: SetStateAction<NewAccountValues>;

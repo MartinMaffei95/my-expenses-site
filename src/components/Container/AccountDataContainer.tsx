@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  IconButton,
-} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { useState } from 'react';
 import { BsFillTrashFill, BsPencil } from 'react-icons/bs';
 import { MdSettings } from 'react-icons/md';
@@ -62,17 +57,17 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
           <AccordionDetails>
             {transactions.map((t) => (
               <div className="label-style border-b-2 flex justify-between">
-                <span className="basis-1/4"> {t.category.name}</span>
+                <span className="basis-1/4"> {t?.category?.name}</span>
                 <span
                   className={`${
-                    t.type === 'SUBSTRACTION'
+                    t?.type === 'SUBSTRACTION'
                       ? 'text-red-500'
-                      : t.type === 'ADDITION' && 'text-green-500'
+                      : t?.type === 'ADDITION' && 'text-green-500'
                   } basis-1/4 `}
                 >
-                  $ {t.value}
+                  $ {t?.value}
                 </span>
-                <span className="basis-1/4"> {t.transaction_date}</span>
+                <span className="basis-1/4"> {t?.transaction_date}</span>
                 <div className="flex justify-between gap-2 text-xl">
                   <div onClick={() => navigate(`/transaction/${t?._id}/edit`)}>
                     <BsPencil />
