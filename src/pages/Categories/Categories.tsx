@@ -3,22 +3,23 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
-  ListItemText,
+  ToggleButton,
+  ToggleButtonGroup,
 } from '@mui/material';
-import { useEffect, useMemo, useState } from 'react';
+import { MouseEvent, useEffect, useMemo, useState } from 'react';
 import {
   MdDeleteOutline,
   MdLibraryAdd,
+  MdModeEditOutline,
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowRight,
 } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { CustomIcon } from '../../components/Pure/CustomIcon';
-import { Category } from '../../components/Pure/SelectField';
-import SelectIcon from '../../components/SelectIcon';
 import { useModal } from '../../hooks/useModal';
+import { Category } from '../../Interfaces/Category.interface';
 import { UserState } from '../../Interfaces/Redux.interface';
+import { deleteCategory } from '../../services/Category.services';
 
 const Categories = () => {
   const [appCategories, setAppCategories] = useState<Category[]>([]);
@@ -44,8 +45,18 @@ const Categories = () => {
 
     return { sysCat, userCat };
   };
+  const user_id = JSON.parse(localStorage.getItem('user_id') as string);
 
-  type CategoryLi = {
+  const removeCategory = async (e: MouseEvent<HTMLElement>) => {
+    const { id } = e.currentTarget;
+    try {
+      await deleteCategory(id);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  type CategoryLiProps = {
     category: Category;
     isSubCategory?: boolean;
     fromUser?: boolean;
@@ -54,7 +65,7 @@ const Categories = () => {
     category,
     isSubCategory = false,
     fromUser = false,
-  }: CategoryLi) => {
+  }: CategoryLiProps) => {
     const [open, setOpen] = useState(false);
     const handleClick = () => {
       setOpen(!open);
@@ -88,26 +99,46 @@ const Categories = () => {
 
               {category.name}
             </span>
+          </ListItemButton>
 
-            <div className="basis-1/4  flex justify-around items-center">
+          {/* BUTTON FOR ADD A SUB CATEGORY */}
+          <div className="basis-1/4  flex justify-around items-center">
+            <ToggleButtonGroup>
               {!isSubCategory ? (
-                <button className="text-xl">
-                  <MdLibraryAdd />
-                </button>
+                <ToggleButton onClick={(e) => console.log(e)} value={'add'}>
+                  <MdLibraryAdd className="text-xl text-black" />
+                </ToggleButton>
               ) : null}
+              {/* IF THE USER IS THE SAME WHO CREATE THE CATEGORY THIS BUTTON IS RENDERED */}
+              {/* USES FOR DELETE A CATEGORY(or SUBCATEGORY) */}
 
               {fromUser ? (
-                <button className="text-xl">
-                  <MdDeleteOutline />
-                </button>
+                <>
+                  <ToggleButton
+                    id={category._id}
+                    onClick={(e) => removeCategory(e)}
+                    value={'delete'}
+                  >
+                    <MdDeleteOutline className="text-xl text-black" />
+                  </ToggleButton>
+                  <ToggleButton value={'edit'} onClick={(e) => console.log(e)}>
+                    <MdModeEditOutline className="text-xl text-black" />
+                  </ToggleButton>
+                </>
               ) : null}
-            </div>
-          </ListItemButton>
+            </ToggleButtonGroup>
+          </div>
         </ListItem>
+        {/* THE SUB CATEGORY (IF HAVE ONE) */}
         <Collapse in={open} timeout="auto" unmountOnExit>
           {category?.sub_category
             ? category?.sub_category.map((cat: Category) => (
-                <CategoryLi key={cat._id} category={cat} isSubCategory />
+                <CategoryLi
+                  key={cat._id}
+                  category={cat}
+                  isSubCategory
+                  fromUser={category.created_by === user_id}
+                />
               ))
             : null}
         </Collapse>
@@ -141,7 +172,11 @@ const Categories = () => {
         </div>
         {userCategories && userCategories.length > 0 ? (
           userCategories.map((cat) => (
-            <CategoryLi key={cat._id} category={cat} />
+            <CategoryLi
+              key={cat._id}
+              category={cat}
+              fromUser={cat.created_by === user_id}
+            />
           ))
         ) : (
           <div>

@@ -22,7 +22,7 @@ const CreateTransaction = () => {
   const initialValues: PostTransactionValues = {
     value: 0,
     account: accounts[0]._id || '',
-    category: user.my_categories[0]._id || '',
+    category: '',
     type: Type_transaction[0]._id || '',
   };
 
@@ -99,7 +99,7 @@ const CreateTransaction = () => {
           labelClassname="label-style"
           inputClassname={'input-style'}
           value={values.category}
-          optGroup={user.my_categories}
+          optGroup={user?.my_categories}
           haveSubCategory
           handleBlur={handleBlur}
           handleChange={handleChange}

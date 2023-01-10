@@ -18,7 +18,7 @@ interface SelectField {
 
   handleChange: ChangeEventHandler<HTMLSelectElement>;
   handleBlur: FocusEventHandler<HTMLSelectElement>;
-  errorMessage?: string | null;
+  errorMessage?: string[] | string | null | any;
   inputClassname?: string;
   labelClassname?: string;
   setValues?: SetStateAction<NewAccountValues>;
