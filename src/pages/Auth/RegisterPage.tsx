@@ -2,10 +2,10 @@ import { useFormik, FormikProps } from 'formik';
 import { useState } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import AuthError from '../../components/authError/AuthError';
-import AuthFormContainer from '../../components/Container/AuthFormContainer';
-import AuthSubmitBtn from '../../components/Pure/authSubmitBtn';
-import InputField from '../../components/Pure/InputField';
+import AuthError from '../../components/Auth/AuthError';
+import AuthFormContainer from '../../components/Auth/Container/AuthFormContainer';
+import AuthSubmitBtn from '../../components/Auth/authSubmitBtn';
+import InputField from '../../components/Forms&Fields/Pure/InputField';
 import { RegisterValues } from '../../Interfaces/Auth.interface';
 import { registerUser } from '../../services/Auth.services';
 import { AuthLayout } from './AuthLayout';
@@ -33,7 +33,8 @@ const RegisterPage = () => {
   const onSubmit = async (): Promise<void> => {
     try {
       await registerUser(values);
-      // navigate('login');
+      localStorage.setItem('username', values.username);
+      navigate('/auth/login');
     } catch (err) {
       if (err instanceof Error) {
         setResponseError(err.message);

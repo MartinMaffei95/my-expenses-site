@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import EditAccount from '../../components/Pure/EditAccount';
+import EditAccount from '../../components/Accounts/Pure/EditAccount';
 import { AccountsState } from '../../Interfaces/Redux.interface';
 
 const EditAccountPage = () => {

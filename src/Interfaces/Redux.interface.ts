@@ -11,9 +11,7 @@ export type ReduxState = {
 };
 
 export interface UserState {
-  user: {
-    user: User;
-  };
+  user: User;
 }
 
 export interface TransactionsState {
@@ -33,4 +31,5 @@ export interface AppState {
     open: boolean;
     action: string;
   };
+  temporal_data: any;
 }

@@ -1,10 +1,10 @@
 import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
-import NavBar from '../../components/Container/NavBar';
-import ActionCreateButton from '../../components/Pure/ActionCreateButton';
-import LeftMenu from '../../components/Pure/LeftMenu';
-import BasicModal from '../../components/Pure/ModalComponent';
+import NavBar from '../../components/LayOut/Container/NavBar';
+import ActionCreateButton from '../../components/LayOut/Pure/ActionCreateButton';
+import LeftMenu from '../../components/LayOut/Pure/LeftMenu';
+import BasicModal from '../../components/LayOut/Pure/ModalComponent';
 import { useReloadData } from '../../hooks/useReloadData';
 import { AppState, ReduxState } from '../../Interfaces/Redux.interface';
 import { toggleModal } from '../../redux/appSlice';

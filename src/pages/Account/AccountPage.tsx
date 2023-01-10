@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import AccountDataContainer from '../../components/Container/AccountDataContainer';
-import AccountData from '../../components/Container/AccountDataContainer';
+import AccountDataContainer from '../../components/Accounts/Container/AccountDataContainer';
+import AccountData from '../../components/Accounts/Container/AccountDataContainer';
 import { Account } from '../../Interfaces/Account.interface';
 import { AccountsState } from '../../Interfaces/Redux.interface';
 import { getAccount } from '../../services/Account.services';

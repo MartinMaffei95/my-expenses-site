@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Params, useParams } from 'react-router-dom';
-import EditTransaction from '../../components/Pure/EditTransaction';
+import EditTransaction from '../../components/Transactions/Pure/EditTransaction';
 import { Transaction } from '../../Interfaces/Transaction.interface';
 import { getTransaction } from '../../services/Transaction.services';
 
