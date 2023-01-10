@@ -1,4 +1,4 @@
-import { Category } from '../components/Pure/SelectField';
+import { Category } from '../Interfaces/Category.interface';
 
 export const Type_transaction: Array<Category> = [
   {

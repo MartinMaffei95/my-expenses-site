@@ -1,5 +1,5 @@
-import { Category } from '../components/Pure/SelectField';
 import { Account } from './Account.interface';
+import { Category } from './Category.interface';
 
 export interface Token {
   token: string;

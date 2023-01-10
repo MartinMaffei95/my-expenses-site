@@ -45,14 +45,14 @@ export const CreateCategory = ({
   const user_id = JSON.parse(localStorage.getItem('user_id') as string);
 
   const onSubmit = async (): Promise<void> => {
-    if (subcategories !== null || subcategories.length > 0) {
+    if (subcategories !== null && subcategories.length > 0) {
       try {
         const category = {
           name: values.name,
           icon: values.icon,
           sub_category: subcategories,
         };
-        await saveCategory(category, user_id);
+        await saveCategory(category as PostCategory, user_id);
       } catch (err) {
         if (err instanceof Error) {
           console.error(err.message);
@@ -174,7 +174,7 @@ export const CreateCategory = ({
                   name={'icon'}
                   value={subCategoryFormik?.values?.icon || ''}
                 />
-                <button onClick={subCategoryFormik.handleSubmit}>
+                <button onClick={(e) => subCategoryFormik.handleSubmit}>
                   Agregar
                 </button>
               </AccordionDetails>
