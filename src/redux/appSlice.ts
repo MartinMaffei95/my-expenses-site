@@ -8,10 +8,13 @@ export const appSlice = createSlice({
       open: false,
       action: '',
     },
+    temporal_data: {},
   },
   reducers: {
     toggleModal: (state, action) => {
       state.modal = action.payload;
+      if (!action.payload.temporal_data) return;
+      state.temporal_data = action.payload.temporal_data;
     },
   },
 });

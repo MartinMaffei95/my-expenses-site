@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler, FocusEventHandler, useEffect } from 'react';
 import { useState } from 'react';
 import { colors } from '../../Interfaces/colors.enum';
-import ColorCircle from '../Molecules/ColorCircle/ColorCircle';
+import ColorCircle from './Molecules/ColorCircle';
 
 type ColorPickerProps = {
   setFieldValue: Function;

@@ -11,21 +11,15 @@ export type ReduxState = {
 };
 
 export interface UserState {
-  user: {
-    user: User;
-  };
+  user: User;
 }
 
 export interface TransactionsState {
-  transactions: {
-    transactions: Transaction[];
-  };
+  transactions: Transaction[];
 }
 
 export interface AccountsState {
-  accounts: {
-    accounts: Account[];
-  };
+  accounts: Account[];
 }
 export interface AppState {
   loading: boolean;
@@ -33,4 +27,5 @@ export interface AppState {
     open: boolean;
     action: string;
   };
+  temporal_data: any;
 }

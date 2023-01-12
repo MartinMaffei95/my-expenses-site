@@ -1,4 +1,4 @@
-import { TransactionContainer } from '../components/Container/TransactionsContainer';
+import { TransactionContainer } from '../components/Transactions/Container/TransactionsContainer';
 
 const Home = () => {
   return (

@@ -1,4 +1,4 @@
-import NewTransactionsContainer from '../../components/Container/NewTransactionsContainer';
+import NewTransactionsContainer from '../../components/Transactions/Container/NewTransactionsContainer';
 
 const NewTransactionPage = () => {
   return <div>{/* <NewTransactionsContainer /> */}</div>;

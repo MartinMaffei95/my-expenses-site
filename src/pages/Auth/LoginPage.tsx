@@ -1,7 +1,7 @@
 import { useFormik, FormikProps } from 'formik';
 import * as yup from 'yup';
-import AuthFormContainer from '../../components/Container/AuthFormContainer';
-import InputField from '../../components/Pure/InputField';
+import AuthFormContainer from '../../components/Auth/Container/AuthFormContainer';
+import InputField from '../../components/Forms&Fields/Pure/InputField';
 import axios from 'axios';
 import { LoginResponse, LoginValues } from '../../Interfaces/Auth.interface';
 import { loginUser } from '../../services/Auth.services';
@@ -11,10 +11,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUserData } from '../../redux/userSlice';
 import { getUserData } from '../../services/User.services';
 import { AuthLayout } from './AuthLayout';
-import AuthSubmitBtn from '../../components/Pure/authSubmitBtn';
+import AuthSubmitBtn from '../../components/Auth/authSubmitBtn';
 import { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import AuthError from '../../components/authError/AuthError';
+import AuthError from '../../components/Auth/AuthError';
 const LoginPage = () => {
   const [isEncrypt, setIsEncrypt] = useState<boolean>(true);
   const [responseError, setResponseError] = useState<string>('');
@@ -28,7 +28,7 @@ const LoginPage = () => {
   const navigate: NavigateFunction = useNavigate();
 
   const initialValues = {
-    username: '',
+    username: localStorage.getItem('username') || '',
     password: '',
   };
 

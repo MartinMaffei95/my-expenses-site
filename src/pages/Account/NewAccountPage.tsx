@@ -1,4 +1,4 @@
-import CreateAccount from '../../components/Pure/CreateAccount.';
+import CreateAccount from '../../components/Accounts/Pure/CreateAccount.';
 
 const NewAccountPage = () => {
   return (

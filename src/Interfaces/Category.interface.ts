@@ -1,7 +1,7 @@
 export interface Category {
   _id: string;
   name: string;
-  icon?: string;
+  icon?: string | null;
   sub_category?: Array<Category> | null;
   isSubCategory?: boolean;
   public?: boolean;

@@ -24,4 +24,5 @@ export type PickedTransactionValues = Pick<Transaction, 'value' | 'type'>;
 export interface PostTransactionValues extends PickedTransactionValues {
   account: string | Account;
   category: string | Category;
+  transaction_date: string;
 }
