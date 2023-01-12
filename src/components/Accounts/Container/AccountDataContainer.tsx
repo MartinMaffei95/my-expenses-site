@@ -8,8 +8,9 @@ import { Account } from '../../../Interfaces/Account.interface';
 import { Transaction } from '../../../Interfaces/Transaction.interface';
 import AccountResume from '../Molecules/AccountResume';
 import AlertDialog from '../../LayOut/Pure/AlertDialog';
+import { TransactionCharts } from '../../Charts/TransactionCharts';
 
-type AccountDataContainerProps = {
+export type AccountDataContainerProps = {
   account: Account;
 };
 
@@ -40,7 +41,7 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
       if (transac) setTransactionObj(transac);
       setAlertOpen(state);
     };
-
+    console.log(account);
     return (
       <div>
         <ToastContainer />
@@ -50,10 +51,12 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
           transaction={transactionObj}
           notificateToast={notificateToast}
         />
+
         <Accordion>
           <AccordionSummary>
             <h4 className="subtitle w-full">Transacciones</h4>
           </AccordionSummary>
+
           <AccordionDetails>
             {transactions.map((t) => (
               <div className="label-style border-b-2 flex justify-between">
@@ -105,14 +108,17 @@ const AccountDataContainer = ({ account }: AccountDataContainerProps) => {
         </span>
         {account.description ? <p>{account.description}</p> : null}
       </div>
+      <div className="flex w-full justify-center">
+        <TransactionCharts account={account} />
+      </div>
       <div className="label-style shadow-lg">
         <h4 className="subtitle">Resumen</h4>
 
         <AccountResume
           initial_balance={account.initial_balance}
-          total_expenses={account.balance}
+          total_expenses={account.total_expenses}
           total_income={account.total_income}
-          balance={account.total_expenses}
+          balance={account.balance}
         />
       </div>
       <div className="label-style shadow-lg">

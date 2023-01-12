@@ -32,6 +32,7 @@ const AccountResume = ({
       </div>
     );
   };
+  console.log(initial_balance, total_expenses, total_income, balance);
 
   return (
     <div className="flex-col divide-y divide-slate-400">

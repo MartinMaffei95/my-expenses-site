@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import AccountDataContainer from '../../components/Accounts/Container/AccountDataContainer';
-import AccountData from '../../components/Accounts/Container/AccountDataContainer';
-import { Account } from '../../Interfaces/Account.interface';
-import { AccountsState } from '../../Interfaces/Redux.interface';
-import { getAccount } from '../../services/Account.services';
+import { ReduxState } from '../../Interfaces/Redux.interface';
 
 const AccountPage = () => {
   // const [account, setAccount] = useState<Account>();
   const { id } = useParams();
-  const account = useSelector((state: AccountsState) =>
+  const account = useSelector((state: ReduxState) =>
     state.accounts.accounts.find((a) => a._id === id)
   );
 

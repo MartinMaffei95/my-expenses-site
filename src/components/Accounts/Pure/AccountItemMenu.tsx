@@ -12,6 +12,7 @@ export const AccountItemMenu = ({ account }: AccountProps) => {
   const toPage = (url: string) => {
     navigate(`${url}`);
   };
+
   return (
     <ListItem disablePadding onClick={() => toPage(`/account/${account._id}`)}>
       <ListItemButton>
@@ -26,6 +27,7 @@ export const AccountItemMenu = ({ account }: AccountProps) => {
             {account.currency} - {account.type}
           </div>
           {/* account resume */}
+
           <AccountResume
             initial_balance={account.initial_balance}
             total_expenses={account.total_expenses}

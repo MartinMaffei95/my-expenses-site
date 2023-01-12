@@ -15,15 +15,11 @@ export interface UserState {
 }
 
 export interface TransactionsState {
-  transactions: {
-    transactions: Transaction[];
-  };
+  transactions: Transaction[];
 }
 
 export interface AccountsState {
-  accounts: {
-    accounts: Account[];
-  };
+  accounts: Account[];
 }
 export interface AppState {
   loading: boolean;
