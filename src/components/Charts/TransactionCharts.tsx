@@ -115,7 +115,7 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
           <option value="BET_DATES">Entre fechas</option>
           <option value="DAY_X">Dia especifico</option>
         </select>
-        {filter?.filterType === 'THIS_MONTH' ? (
+        {filter?.filterType === 'THIS_MONTH' && filter.typeOfChart === 'EvI' ? (
           <input
             ref={checkRef}
             type="checkbox"

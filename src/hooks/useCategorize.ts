@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 import { Account } from '../Interfaces/Account.interface';
-import { AccountsState } from '../Interfaces/Redux.interface';
+import { AccountsState, ReduxState } from '../Interfaces/Redux.interface';
 
 const useCategorize = () => {
   const [cashAccounts, setCashAccounts] = useState<Account[]>([]);
@@ -10,7 +10,7 @@ const useCategorize = () => {
   const [creditCardAccounts, setCreditCardAccounts] = useState<Account[]>([]);
 
   const allAccounts = useSelector(
-    (state: AccountsState) => state.accounts.accounts
+    (state: ReduxState) => state.accounts.accounts
   );
 
   const categorizeAccounts = (accounts: Account[]) => {

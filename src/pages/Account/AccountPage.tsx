@@ -9,7 +9,6 @@ const AccountPage = () => {
   const account = useSelector((state: ReduxState) =>
     state.accounts.accounts.find((a) => a._id === id)
   );
-
   return (
     <div>{account ? <AccountDataContainer account={account} /> : null}</div>
   );

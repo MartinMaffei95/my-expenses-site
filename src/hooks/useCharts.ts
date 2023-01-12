@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { ChartFilter } from '../components/Charts/TransactionCharts';
 import { ReduxState } from '../Interfaces/Redux.interface';
 import { Transaction } from '../Interfaces/Transaction.interface';
+import { randomColor } from '../utils/randomColor';
 import { useChartFilter } from './useChartFilter';
 
 type useChartProps = {
@@ -44,7 +45,6 @@ export const useChart = ({ filter, transactions }: useChartProps) => {
         filter.endDate,
         'days'
       );
-      console.log('BET_DATES=>', filteredTransactions);
     } else if (filter.filterType === 'DAY_X') {
       filteredTransactions = filterByDate(transactions, filter.initDate);
     } else if (filter.filterType === 'ALL') {
@@ -60,12 +60,12 @@ export const useChart = ({ filter, transactions }: useChartProps) => {
               {
                 label: 'Ingresos',
                 data: arr.map((ts) => ts.addition),
-                backgroundColor: ['green'],
+                backgroundColor: ['#15803d'],
               },
               {
                 label: 'Egresos',
                 data: arr.map((ts) => ts.substraction),
-                backgroundColor: ['red'],
+                backgroundColor: ['#b91c1c'],
               },
             ],
           };
@@ -94,7 +94,7 @@ export const useChart = ({ filter, transactions }: useChartProps) => {
           datasets: [
             {
               data: arr.map((ts) => ts.value),
-              backgroundColor: ['#1580dd', '#b91cff', '#df921c'],
+              backgroundColor: arr.map((ts) => randomColor()),
             },
           ],
         };
@@ -107,7 +107,7 @@ export const useChart = ({ filter, transactions }: useChartProps) => {
           datasets: [
             {
               data: arr.map((ts) => ts.value),
-              backgroundColor: ['#1580dd', '#b91cff', '#d9221c'],
+              backgroundColor: arr.map((ts) => randomColor()),
             },
           ],
         };

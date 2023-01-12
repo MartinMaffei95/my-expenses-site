@@ -4,19 +4,23 @@ import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useModal } from '../../../hooks/useModal';
 import { useReloadData } from '../../../hooks/useReloadData';
-import { AccountsState, UserState } from '../../../Interfaces/Redux.interface';
+import {
+  AccountsState,
+  ReduxState,
+  UserState,
+} from '../../../Interfaces/Redux.interface';
 import { PostTransactionValues } from '../../../Interfaces/Transaction.interface';
 import { saveTransaction } from '../../../services/Transaction.services';
 import { Type_transaction } from '../../../utils/TypeConfig';
 import InputField from '../../Forms&Fields/Pure/InputField';
-import { ModalProps } from '../../LayOut/Pure/ModalComponent';
 import SelectField from '../../Forms&Fields/Pure/SelectField';
+import { normalizeDateOP } from '../../../utils/normalizeDate';
+import dayjs from 'dayjs';
+import { randomColor } from '../../../utils/randomColor';
 
 const CreateTransaction = () => {
-  const { user } = useSelector((state: UserState) => state.user);
-  const accounts = useSelector(
-    (state: AccountsState) => state.accounts.accounts
-  );
+  const { user } = useSelector((state: ReduxState) => state.user);
+  const accounts = useSelector((state: ReduxState) => state.accounts.accounts);
   const { VITE_API_URI } = import.meta.env;
 
   const initialValues: PostTransactionValues = {
@@ -24,6 +28,7 @@ const CreateTransaction = () => {
     account: accounts[0]._id || '',
     category: '',
     type: Type_transaction[0]._id || '',
+    transaction_date: normalizeDateOP() || '',
   };
 
   const validationSchema = yup.object({
@@ -31,6 +36,7 @@ const CreateTransaction = () => {
     account: yup.string().required(),
     category: yup.string().required(),
     type: yup.string().required(),
+    transaction_date: yup.string().required(),
   });
 
   const reloadData = useReloadData();
@@ -39,7 +45,6 @@ const CreateTransaction = () => {
   const onSubmit = async () => {
     try {
       await saveTransaction(values);
-
       resetForm();
       reloadData();
       handleModal(false, '');
@@ -63,6 +68,7 @@ const CreateTransaction = () => {
     initialValues,
     validationSchema,
   });
+  console.log();
 
   useEffect(() => {}, []);
   return (
@@ -79,6 +85,25 @@ const CreateTransaction = () => {
           handleBlur={handleBlur}
           handleChange={handleChange}
           errorMessage={touched.value && errors.value ? errors.value : null}
+        />
+        <InputField
+          label="Fecha"
+          inputName="transaction_date"
+          type="date"
+          labelClassname="label-style"
+          inputClassname={'input-style'}
+          value={normalizeDateOP(
+            values.transaction_date,
+            'DD/MM/YYYY',
+            'YYYY-MM-DD'
+          )}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+          errorMessage={
+            touched.transaction_date && errors.transaction_date
+              ? errors.transaction_date
+              : null
+          }
         />
         <SelectField
           label="Cuenta"
