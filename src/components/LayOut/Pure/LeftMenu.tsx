@@ -9,7 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useSelector } from 'react-redux';
-import { AccountsState } from '../../../Interfaces/Redux.interface';
+import { AccountsState, ReduxState } from '../../../Interfaces/Redux.interface';
 import { mapApiToAccount } from '../../../utils/mapApiToAccount';
 import { Account } from '../../../Interfaces/Account.interface';
 import AccountAdminPanel from '../../Accounts/Pure/AccountAdminPanel';
@@ -31,7 +31,7 @@ export default function LeftMenu({ toggleDrawer, state }: LeftMenuProps) {
     setOpen(!open);
   };
   const allAccounts = useSelector(
-    (state: AccountsState) => state.accounts.accounts
+    (state: ReduxState) => state.accounts.accounts
   );
 
   const navigate = useNavigate();

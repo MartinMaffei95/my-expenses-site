@@ -56,7 +56,7 @@ export const SingleTransaction = ({
         {transaction?.account?.currency}
       </span>
       <div className="flex">
-        <CustomIcon iconName={transaction?.category?.icon} />-
+        <CustomIcon iconName={transaction?.category?.icon || ''} />-
         <p>{transaction?.category?.name}</p>
       </div>
       <div className="text-gray-600 text-sm w-full flex justify-end pr-2">

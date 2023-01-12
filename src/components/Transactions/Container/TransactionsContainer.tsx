@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TransactionsState } from '../../../Interfaces/Redux.interface';
+import {
+  ReduxState,
+  TransactionsState,
+} from '../../../Interfaces/Redux.interface';
 import { Transaction } from '../../../Interfaces/Transaction.interface';
 import { mapApiToTransaction } from '../../../utils/mapApiToTransaction';
 import AlertDialog from '../../LayOut/Pure/AlertDialog';
@@ -12,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const TransactionContainer = () => {
   const [transactions, setTransactions] = useState<Array<Transaction>>([]);
   const allTransactions = useSelector(
-    (state: TransactionsState) => state.transactions.transactions
+    (state: ReduxState) => state.transactions.transactions
   );
 
   const [alertOpen, setAlertOpen] = useState<boolean>(false);

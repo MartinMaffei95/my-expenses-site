@@ -4,15 +4,12 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { useReloadData } from '../../../hooks/useReloadData';
-import { AccountsState, UserState } from '../../../Interfaces/Redux.interface';
+import { ReduxState } from '../../../Interfaces/Redux.interface';
 import {
   PostTransactionValues,
   Transaction,
 } from '../../../Interfaces/Transaction.interface';
-import {
-  editTransaction,
-  saveTransaction,
-} from '../../../services/Transaction.services';
+import { editTransaction } from '../../../services/Transaction.services';
 import { Type_transaction } from '../../../utils/TypeConfig';
 import InputField from '../../Forms&Fields/Pure/InputField';
 import SelectField from '../../Forms&Fields/Pure/SelectField';
@@ -23,17 +20,17 @@ type EditTransactionProps = {
 };
 
 const EditTransaction = ({ transactionToEdit, id }: EditTransactionProps) => {
-  const { user } = useSelector((state: UserState) => state.user);
-  const accounts = useSelector(
-    (state: AccountsState) => state.accounts.accounts
-  );
+  const { user } = useSelector((state: ReduxState) => state.user);
+  const accounts = useSelector((state: ReduxState) => state.accounts.accounts);
   const navigate = useNavigate();
   const { VITE_API_URI } = import.meta.env;
+
   const initialValues = {
     value: transactionToEdit?.value || 0,
     account: transactionToEdit?.account || '',
     category: transactionToEdit?.category || '',
     type: transactionToEdit?.type || '',
+    transaction_date: transactionToEdit?.transaction_date || '',
   };
 
   const validationSchema = yup.object({

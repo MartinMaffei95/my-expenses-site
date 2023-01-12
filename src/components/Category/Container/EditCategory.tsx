@@ -33,8 +33,8 @@ export const EditCategory = ({
   );
 
   const initialValues = {
-    name: category?.name,
-    icon: category?.icon,
+    name: category?.name || '',
+    icon: category?.icon || null,
   };
 
   const validationSchema = yup.object({

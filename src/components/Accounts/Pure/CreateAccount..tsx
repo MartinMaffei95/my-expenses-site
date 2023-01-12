@@ -4,7 +4,11 @@ import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useReloadData } from '../../../hooks/useReloadData';
 import { NewAccountValues } from '../../../Interfaces/Account.interface';
-import { AccountsState, UserState } from '../../../Interfaces/Redux.interface';
+import {
+  AccountsState,
+  ReduxState,
+  UserState,
+} from '../../../Interfaces/Redux.interface';
 import { createAccount } from '../../../services/Account.services';
 import { Type_transaction } from '../../../utils/TypeConfig';
 import ColorPicker from '../../ColorPicker/ColorPicker';
@@ -13,9 +17,7 @@ import SelectField from '../../Forms&Fields/Pure/SelectField';
 
 const CreateAccount = () => {
   const { appSettings } = useSelector((state: any) => state.settings);
-  const accounts = useSelector(
-    (state: AccountsState) => state.accounts.accounts
-  );
+  const accounts = useSelector((state: ReduxState) => state.accounts.accounts);
   const { VITE_API_URI } = import.meta.env;
 
   const initialValues: NewAccountValues = {

@@ -8,7 +8,11 @@ import {
   Account,
   PostNewAccountValues,
 } from '../../../Interfaces/Account.interface';
-import { AccountsState, UserState } from '../../../Interfaces/Redux.interface';
+import {
+  AccountsState,
+  ReduxState,
+  UserState,
+} from '../../../Interfaces/Redux.interface';
 import {
   PostTransactionValues,
   Transaction,
@@ -29,9 +33,7 @@ type EditAccountProps = {
 };
 
 const EditAccount = ({ accountToEdit, id }: EditAccountProps) => {
-  const accounts = useSelector(
-    (state: AccountsState) => state.accounts.accounts
-  );
+  const accounts = useSelector((state: ReduxState) => state.accounts.accounts);
   const { appSettings } = useSelector((state: any) => state.settings);
 
   const navigate = useNavigate();
