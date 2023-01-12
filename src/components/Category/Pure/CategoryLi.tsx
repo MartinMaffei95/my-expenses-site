@@ -77,7 +77,9 @@ export const CategoryLi = ({
 
           <span
             className={`basis-3/4 flex items-center gap-2 ${
+
               isSubCategory ? 'pl-4 font-light' : 'font-normal'
+
             }`}
           >
             {category.icon ? (
@@ -96,6 +98,7 @@ export const CategoryLi = ({
             {!isSubCategory && fromUser ? (
               <ToggleButton onClick={(e) => console.log(e)} value={'add'}>
                 <MdLibraryAdd className="text-xl text-neutral-900" />
+
               </ToggleButton>
             ) : null}
             {/* IF THE USER IS THE SAME WHO CREATE THE CATEGORY THIS BUTTON IS RENDERED */}
@@ -109,6 +112,7 @@ export const CategoryLi = ({
                   value={'delete'}
                 >
                   <MdDeleteOutline className="text-xl text-neutral-900" />
+
                 </ToggleButton>
                 <ToggleButton
                   id={category._id}
@@ -116,6 +120,7 @@ export const CategoryLi = ({
                   onClick={updateCategory}
                 >
                   <MdModeEditOutline className="text-xl text-neutral-900" />
+
                 </ToggleButton>
               </>
             ) : null}

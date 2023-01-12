@@ -50,6 +50,7 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
   const [filter, setFilter] = useState<ChartFilter>({
     filterType: 'THIS_MONTH',
     initDate: normalizeDateOP(dayjs().subtract(7, 'days').format()), // => HTML inputdate format
+
     endDate: normalizeDateOP(), // => HTML inputdate format
     typeOfChart: 'EvI',
     barChart: false,
@@ -85,6 +86,7 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
             : name === 'filterType' && value === 'DAY_X'
             ? normalizeDateOP()
             : prevState.initDate,
+
         [name]: value,
       }));
     }

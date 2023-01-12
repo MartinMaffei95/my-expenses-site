@@ -62,7 +62,7 @@ const SelectIcon = ({ setFieldValue, name, value }: SelectIcon) => {
       </span>
       <div className="flex flex-wrap bg-neutral-500 w-full p-2 gap-1 justify-around overflow-scroll h-56 ">
         {memoizedCallback}
-        {/* {renderIcons(iconSelect)} */}
+
       </div>
     </div>
   );
