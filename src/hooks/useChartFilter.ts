@@ -133,7 +133,7 @@ export const useChartFilter = () => {
         {
           _id: '0',
           name: 'none',
-          value: 0.1,
+          // value: 0.1,
         },
       ];
     return proccesTsx;

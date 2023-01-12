@@ -57,7 +57,7 @@ export const LoggedLayout = ({ children }: Props) => {
       <LeftMenu toggleDrawer={toggleDrawer} state={state} />
       <BasicModal />
       {!includesSome ? <ActionCreateButton /> : null}
-      <div>{children}</div>
+      <div className="overflow-hidden pb-2 select-none">{children}</div>
     </>
   );
 };
