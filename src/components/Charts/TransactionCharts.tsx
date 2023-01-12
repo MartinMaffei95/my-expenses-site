@@ -49,7 +49,8 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
   const [chartData, setChartData] = useState({});
   const [filter, setFilter] = useState<ChartFilter>({
     filterType: 'THIS_MONTH',
-    initDate: normalizeDateOP(), // => HTML inputdate format
+    initDate: normalizeDateOP(dayjs().subtract(7, 'days').format()), // => HTML inputdate format
+
     endDate: normalizeDateOP(), // => HTML inputdate format
     typeOfChart: 'EvI',
     barChart: false,
@@ -67,6 +68,7 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
     if (type === 'date') {
       setFilter((prevState) => ({
         ...prevState,
+        barChart: false,
         [name]: normalizeDateOP(value),
       }));
     } else if (type === 'checkbox') {
@@ -77,6 +79,14 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
     } else {
       setFilter((prevState) => ({
         ...prevState,
+        barChart: false,
+        initDate:
+          name === 'filterType' && value === 'BET_DATES'
+            ? normalizeDateOP(dayjs().subtract(7, 'days').format())
+            : name === 'filterType' && value === 'DAY_X'
+            ? normalizeDateOP()
+            : prevState.initDate,
+
         [name]: value,
       }));
     }

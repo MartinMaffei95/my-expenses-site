@@ -77,7 +77,9 @@ export const CategoryLi = ({
 
           <span
             className={`basis-3/4 flex items-center gap-2 ${
-              isSubCategory ? 'pl-4 ' : 'font-semibold'
+
+              isSubCategory ? 'pl-4 font-light' : 'font-normal'
+
             }`}
           >
             {category.icon ? (
@@ -93,9 +95,10 @@ export const CategoryLi = ({
         {/* BUTTON FOR ADD A SUB CATEGORY */}
         <div className="basis-1/4  flex justify-around items-center">
           <ToggleButtonGroup>
-            {!isSubCategory ? (
+            {!isSubCategory && fromUser ? (
               <ToggleButton onClick={(e) => console.log(e)} value={'add'}>
-                <MdLibraryAdd className="text-xl text-black" />
+                <MdLibraryAdd className="text-xl text-neutral-900" />
+
               </ToggleButton>
             ) : null}
             {/* IF THE USER IS THE SAME WHO CREATE THE CATEGORY THIS BUTTON IS RENDERED */}
@@ -108,14 +111,16 @@ export const CategoryLi = ({
                   onClick={(e) => removeCategory(e)}
                   value={'delete'}
                 >
-                  <MdDeleteOutline className="text-xl text-black" />
+                  <MdDeleteOutline className="text-xl text-neutral-900" />
+
                 </ToggleButton>
                 <ToggleButton
                   id={category._id}
                   value={'edit'}
                   onClick={updateCategory}
                 >
-                  <MdModeEditOutline className="text-xl text-black" />
+                  <MdModeEditOutline className="text-xl text-neutral-900" />
+
                 </ToggleButton>
               </>
             ) : null}

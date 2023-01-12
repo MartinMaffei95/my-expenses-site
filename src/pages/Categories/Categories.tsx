@@ -1,27 +1,14 @@
-import {
-  Collapse,
-  List,
-  ListItem,
-  ListItemButton,
-  ToggleButton,
-  ToggleButtonGroup,
-} from '@mui/material';
-import { MouseEvent, useEffect, useMemo, useState } from 'react';
-import {
-  MdDeleteOutline,
-  MdLibraryAdd,
-  MdModeEditOutline,
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowRight,
-} from 'react-icons/md';
+import { List } from '@mui/material';
+import { useEffect, useMemo, useState } from 'react';
+import { MdLibraryAdd } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { CategoryLi } from '../../components/Category/Pure/CategoryLi';
-import { CustomIcon } from '../../components/SelectIcon/Molecule/CustomIcon';
+
 import { useModal } from '../../hooks/useModal';
 import { useReloadData } from '../../hooks/useReloadData';
 import { Category } from '../../Interfaces/Category.interface';
 import { ReduxState, UserState } from '../../Interfaces/Redux.interface';
-import { deleteCategory } from '../../services/Category.services';
+
 
 const Categories = () => {
   const [appCategories, setAppCategories] = useState<Category[]>([]);
@@ -57,7 +44,6 @@ const Categories = () => {
   const { handleModal } = useModal();
   return (
     <div className="p-2  mb-6">
-      <h3 className="subtitle mt-0">Categorias</h3>
       <List>
         <p className="subtitle">Categorias predefinidas</p>
         {appCategories.map((cat) => (
@@ -65,14 +51,16 @@ const Categories = () => {
         ))}
       </List>
       <div>
-        <div className="flex justify-center items-center gap-2">
-          <p className="subtitle">Mis categorias</p>{' '}
-          <button
-            className="text-xl"
-            onClick={() => handleModal(true, 'CREATE_CATEGORY')}
-          >
-            <MdLibraryAdd />
-          </button>
+        <div className="flex justify-center items-baseline gap-4">
+          <span className="subtitle">Mis categorias</span>{' '}
+          {userCategories && userCategories.length > 0 ? (
+            <button
+              className="text-xl flex justify-center items-center text-neutral-900"
+              onClick={() => handleModal(true, 'CREATE_CATEGORY')}
+            >
+              <MdLibraryAdd />
+            </button>
+          ) : null}
         </div>
         {userCategories && userCategories.length > 0 ? (
           userCategories.map((cat) => (
@@ -83,17 +71,14 @@ const Categories = () => {
             />
           ))
         ) : (
-          <div>
-            <p>No hay nada</p>
-            <span>
-              Crear categoria{' '}
-              <button
-                className="text-xl"
-                onClick={() => handleModal(true, 'CREATE_CATEGORY')}
-              >
-                <MdLibraryAdd />
-              </button>
-            </span>
+          <div className="flex flex-col items-center justify-center gap-2 mb-2">
+            <button
+              className="flex items-center justify-center gap-2 mb-2 border-2 rounded p-2"
+              onClick={() => handleModal(true, 'CREATE_CATEGORY')}
+            >
+              Crear categoria
+              <MdLibraryAdd className=" text-xl text-neutral-900" />
+            </button>
           </div>
         )}
       </div>
