@@ -27,6 +27,7 @@ import { useChartFilter } from '../../hooks/useChartFilter';
 import { normalizeDate, normalizeDateOP } from '../../utils/normalizeDate';
 import * as dayjs from 'dayjs';
 import { useChart } from '../../hooks/useCharts';
+import InputField from '../Forms&Fields/Pure/InputField';
 
 export type ChartFilter = {
   filterType: string;
@@ -116,13 +117,17 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
           <option value="DAY_X">Dia especifico</option>
         </select>
         {filter?.filterType === 'THIS_MONTH' && filter.typeOfChart === 'EvI' ? (
-          <input
-            ref={checkRef}
-            type="checkbox"
-            name="barChart"
-            checked={filter.barChart}
-            onChange={(e) => handleFilter(e)}
-          />
+          <div className="flex tems-center justify-center gap-4 p-2 border-black border-2 rounded">
+            <label htmlFor="barChart">Mostrar dia a dia</label>
+            <input
+              ref={checkRef}
+              className="h-6 w-4"
+              type="checkbox"
+              name="barChart"
+              checked={filter.barChart}
+              onChange={(e) => handleFilter(e)}
+            />
+          </div>
         ) : null}
         {filter?.filterType === 'BET_DATES' ? (
           <div className="flex justify-around">
@@ -176,9 +181,6 @@ export const TransactionCharts = ({ account }: AccountDataContainerProps) => {
         </select>
       </div>
       <div className="flex justify-center items-center w-screen h-96">
-        {/* <Doughnut data={tsxData} />
-        <Doughnut data={tsxDat} /> 
-         <Bar data={chartSettings} />*/}
         {chartSettings && !filter.barChart ? (
           <Doughnut data={chartSettings} />
         ) : chartSettings && filter.barChart === true ? (
