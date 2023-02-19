@@ -1,7 +1,7 @@
-import { ChangeEventHandler, FocusEventHandler, SetStateAction } from 'react';
-import { NewAccountValues } from '../../../Interfaces/Account.interface';
-import { Category } from '../../../Interfaces/Category.interface';
-import { CustomIcon } from '../../SelectIcon/Molecule/CustomIcon';
+import { ChangeEventHandler, FocusEventHandler, SetStateAction } from "react";
+import { NewAccountValues } from "../../../Interfaces/Account.interface";
+import { Category } from "../../../Interfaces/Category.interface";
+import { CustomIcon } from "../../SelectIcon/Molecule/CustomIcon";
 
 interface Options {
   accounts: Array<Category>;
@@ -12,7 +12,8 @@ interface Options {
 interface SelectField {
   label: string;
   inputName: string;
-  optGroup?: Options['categories'];
+  optGroup?: Options["categories"];
+  optSelected?: number;
   haveSubCategory?: boolean;
   value: string | any;
   placeholder?: string;
@@ -32,6 +33,7 @@ const SelectField = ({
   placeholder,
 
   optGroup,
+  optSelected,
   haveSubCategory = false,
   handleBlur,
   handleChange,
@@ -44,7 +46,7 @@ const SelectField = ({
     <div>
       <label
         htmlFor={inputName}
-        className={labelClassname ? `${labelClassname}` : ''}
+        className={labelClassname ? `${labelClassname}` : ""}
       >
         {label}
       </label>
@@ -53,36 +55,50 @@ const SelectField = ({
         value={value}
         onBlur={handleBlur}
         onChange={handleChange}
-        className={inputClassname ? `${inputClassname}` : ''}
+        className={inputClassname ? `${inputClassname}` : ""}
       >
-        {optGroup && !haveSubCategory
-          ? optGroup.map((opt) => {
-              return (
-                <>
-                  {opt._id === undefined || opt._id === '' ? (
-                    <option key={''} value={''}>
-                      {''}
-                    </option>
-                  ) : (
-                    <option key={opt._id} value={opt._id}>
-                      {opt.name}
-                    </option>
-                  )}
-                </>
-              );
-            })
-          : null}
+        {optGroup && !haveSubCategory && !optSelected ? (
+          optGroup.map((opt) => {
+            return (
+              <>
+                {opt._id === undefined || opt._id === "" ? (
+                  <option
+                    key={""}
+                    value={""}
+                  >
+                    {""}
+                  </option>
+                ) : (
+                  <option
+                    key={opt._id}
+                    value={opt._id}
+                  >
+                    {opt.name}
+                  </option>
+                )}
+              </>
+            );
+          })
+        ) : optGroup && !haveSubCategory && optSelected ? (
+          <option>{optGroup[optSelected].name}</option>
+        ) : null}
 
         {optGroup && haveSubCategory
           ? optGroup.map((opt) => (
               <>
-                <option key={opt._id} value={opt._id}>
-                  {opt?.icon ? <CustomIcon iconName={opt?.icon} /> : null}{' '}
+                <option
+                  key={opt._id}
+                  value={opt._id}
+                >
+                  {opt?.icon ? <CustomIcon iconName={opt?.icon} /> : null}{" "}
                   {opt.name}
                 </option>
                 {opt.sub_category &&
                   opt.sub_category.map((sub_category) => (
-                    <option key={sub_category._id} value={sub_category._id}>
+                    <option
+                      key={sub_category._id}
+                      value={sub_category._id}
+                    >
                       - {sub_category.name}
                     </option>
                   ))}

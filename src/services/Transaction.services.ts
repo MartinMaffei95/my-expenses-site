@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { Params } from 'react-router-dom';
+import axios from "axios";
+import { Params } from "react-router-dom";
 import {
   AllTransactionResponse,
   GetTransactionAXIOSResponse,
   GetTransactionResponse,
   PostTransactionValues,
   Transaction,
-} from '../Interfaces/Transaction.interface';
+} from "../Interfaces/Transaction.interface";
 
 const { VITE_API_URI } = import.meta.env;
 
@@ -21,7 +21,7 @@ export const getAllTransactions = async (): Promise<AllTransactionResponse> => {
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem('token') || '{}'
+            localStorage.getItem("token") || "{}"
           )}`,
         },
       }
@@ -31,7 +31,7 @@ export const getAllTransactions = async (): Promise<AllTransactionResponse> => {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data);
     } else {
-      throw new Error('UNEXPECTED ERROR');
+      throw new Error("UNEXPECTED ERROR");
     }
   }
 };
@@ -45,7 +45,7 @@ export const getTransaction = async (
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem('token') || '{}'
+            localStorage.getItem("token") || "{}"
           )}`,
         },
       }
@@ -56,7 +56,7 @@ export const getTransaction = async (
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data);
     } else {
-      throw new Error('UNEXPECTED ERROR');
+      throw new Error("UNEXPECTED ERROR");
     }
   }
 };
@@ -69,7 +69,7 @@ export const saveTransaction = async (values: PostTransactionValues) => {
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem('token') || '{}'
+            localStorage.getItem("token") || "{}"
           )}`,
         },
       }
@@ -79,7 +79,7 @@ export const saveTransaction = async (values: PostTransactionValues) => {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data);
     } else {
-      throw new Error('UNEXPECTED ERROR');
+      throw new Error("UNEXPECTED ERROR");
     }
   }
 };
@@ -95,7 +95,7 @@ export const editTransaction = async (
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem('token') || '{}'
+            localStorage.getItem("token") || "{}"
           )}`,
         },
       }
@@ -105,7 +105,7 @@ export const editTransaction = async (
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data);
     } else {
-      throw new Error('UNEXPECTED ERROR');
+      throw new Error("UNEXPECTED ERROR");
     }
   }
 };
@@ -117,7 +117,7 @@ export const deleteTransaction = async (transaction_id: string | undefined) => {
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem('token') || '{}'
+            localStorage.getItem("token") || "{}"
           )}`,
         },
       }
@@ -127,7 +127,30 @@ export const deleteTransaction = async (transaction_id: string | undefined) => {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data);
     } else {
-      throw new Error('UNEXPECTED ERROR');
+      throw new Error("UNEXPECTED ERROR");
+    }
+  }
+};
+
+export const createTransference = async (values: PostTransactionValues) => {
+  try {
+    const { data, status } = await axios.post<Transaction>(
+      `${VITE_API_URI}/transactions/transfer`,
+      values,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("token") || "{}"
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data);
+    } else {
+      throw new Error("UNEXPECTED ERROR");
     }
   }
 };

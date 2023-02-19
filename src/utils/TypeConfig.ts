@@ -1,12 +1,16 @@
-import { Category } from '../Interfaces/Category.interface';
+import { Category } from "../Interfaces/Category.interface";
 
 export const Type_transaction: Array<Category> = [
   {
-    _id: 'SUBSTRACTION',
-    name: 'Gasto',
+    _id: "SUBSTRACTION",
+    name: "Gasto",
   },
   {
-    _id: 'ADDITION',
-    name: 'Ingreso',
+    _id: "ADDITION",
+    name: "Ingreso",
+  },
+  {
+    _id: "TRANSFERENCE",
+    name: "Transferencia",
   },
 ];
