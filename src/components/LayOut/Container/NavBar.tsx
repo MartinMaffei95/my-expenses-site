@@ -1,14 +1,14 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import { BiMenu, BiWrench } from 'react-icons/bi';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { LeftMenuProps } from '../Pure/LeftMenu';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import { BiMenu, BiWrench } from "react-icons/bi";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { LeftMenuProps } from "../Pure/LeftMenu";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ toggleDrawer }: LeftMenuProps) {
   const [auth, setAuth] = React.useState(true);
@@ -54,7 +54,11 @@ export default function NavBar({ toggleDrawer }: LeftMenuProps) {
           >
             <BiMenu />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
             {/* Photos */}
           </Typography>
           {auth && (
@@ -73,26 +77,36 @@ export default function NavBar({ toggleDrawer }: LeftMenuProps) {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
                 <MenuItem
                   onClick={() => {
-                    navigate('/categories');
+                    navigate("/categories");
                     handleClose();
                   }}
                 >
                   Mis categorias
                 </MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user_id");
+                    navigate("/auth/login");
+                    handleClose();
+                  }}
+                >
+                  Cerrar sesion
+                </MenuItem>
               </Menu>
             </div>
           )}
